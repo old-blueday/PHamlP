@@ -66,7 +66,7 @@ class SassVariableNode extends SassNode {
 	/**
 	 * Parse this node.
 	 * Sets the variable in the current context.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return array the parsed node - an empty array
 	 */
 	public function parse($context) {

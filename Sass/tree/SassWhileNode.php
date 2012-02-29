@@ -44,7 +44,7 @@ class SassWhileNode extends SassNode {
 
 	/**
 	 * Parse this node.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return array the parsed child nodes
 	 */
 	public function parse($context) {

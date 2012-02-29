@@ -43,7 +43,7 @@ class SassImportNode extends SassNode {
 	 * Parse this node.
 	 * If the node is a CSS import return the CSS import rule.
 	 * Else returns the rendered tree for the file.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return array the parsed node
 	 */
 	public function parse($context) {

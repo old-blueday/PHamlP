@@ -68,7 +68,7 @@ class SassIfNode extends SassNode {
 
 	/**
 	 * Parse this node.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return array parsed child nodes
 	 */
 	public function parse($context) {

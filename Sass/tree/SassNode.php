@@ -289,7 +289,7 @@ class SassNode {
 	/**
 	 * Evaluates a SassScript expression.
 	 * @param string expression to evaluate
-	 * @param SassContext the context in which the expression is evaluated
+	 * @param Sass_tree_SassContext the context in which the expression is evaluated
 	 * @return SassLiteral value of parsed expression
 	 */
 	protected function evaluate($expression, $context, $x=null) {
@@ -300,7 +300,7 @@ class SassNode {
 	/**
 	 * Replace interpolated SassScript contained in '#{}' with the parsed value.
 	 * @param string the text to interpolate
-	 * @param SassContext the context in which the string is interpolated
+	 * @param Sass_tree_SassContext the context in which the string is interpolated
 	 * @return string the interpolated text
 	 */
 	protected function interpolate($expression, $context) {
@@ -320,7 +320,7 @@ class SassNode {
 
 	/**
 	 * Parse the children of the node.
-	 * @param SassContext the context in which the children are parsed
+	 * @param Sass_tree_SassContext the context in which the children are parsed
 	 * @return array the parsed child nodes
 	 */
 	protected function parseChildren($context) {

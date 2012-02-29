@@ -49,13 +49,13 @@ class SassMixinNode extends SassNode {
 	 * Parse this node.
 	 * Set passed arguments and any optional arguments not passed to their
 	 * defaults, then render the children of the mixin definition.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return array the parsed node
 	 */
 	public function parse($context) {
 		$mixin = $context->getMixin($this->name);
 
-		$context = new SassContext($context);
+		$context = new Sass_tree_SassContext($context);
 		$argc = count($this->args);
 		$count = 0;
 		foreach ($mixin->args as $name=>$value) {

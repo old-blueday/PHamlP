@@ -36,7 +36,7 @@ class SassScriptVariable {
 
 	/**
 	 * Returns the SassScript object for this variable.
-	 * @param SassContext context of the variable
+	 * @param Sass_tree_SassContext context of the variable
 	 * @return SassLiteral the SassScript object for this variable
 	 */
 	public function evaluate($context) {

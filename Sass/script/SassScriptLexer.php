@@ -44,7 +44,7 @@ class SassScriptLexer {
 	/**
 	 * Lex an expression into SassScript tokens.
 	 * @param string expression to lex
-	 * @param SassContext the context in which the expression is lexed
+	 * @param Sass_tree_SassContext the context in which the expression is lexed
 	 * @return array tokens
 	 */
 	public function lex($string, $context) {

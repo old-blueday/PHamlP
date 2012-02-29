@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassContext class file.
+ * Sass_tree_SassContext class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,16 +10,16 @@
  */
 
 /**
- * SassContext class.
+ * Sass_tree_SassContext class.
  * Defines the context that the parser is operating in and so allows variables
  * to be scoped.
  * A new context is created for Mixins and imported files.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassContext {
+class Sass_tree_SassContext {
 	/**
-	 * @var SassContext enclosing context
+	 * @var Sass_tree_SassContext enclosing context
 	 */
 	protected $parent;
 	/**
@@ -33,12 +33,12 @@ class SassContext {
 	/**
 	 * @var SassNode the node being processed
 	 */
-	public $node; 
+	public $node;
 
 	/**
-	 * SassContext constructor.
-	 * @param SassContext - the enclosing context
-	 * @return SassContext
+	 * Sass_tree_SassContext constructor.
+	 * @param Sass_tree_SassContext - the enclosing context
+	 * @return Sass_tree_SassContext
 	 */
 	public function __construct($parent = null) {
 		$this->parent = $parent;

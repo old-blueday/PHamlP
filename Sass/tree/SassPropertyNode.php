@@ -90,7 +90,7 @@ class SassPropertyNode extends SassNode {
 	 * Parse this node.
 	 * If the node is a property namespace return all parsed child nodes. If not
 	 * return the parsed version of this node.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return array the parsed node
 	 */
 	public function parse($context) {

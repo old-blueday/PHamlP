@@ -26,7 +26,7 @@ class SassScriptParser {
 	const CSS_PROPERTY = 2;
 	
 	/**
-	 * @var SassContext Used for error reporting
+	 * @var Sass_tree_SassContext Used for error reporting
 	 */
 	public static $context;
 
@@ -46,7 +46,7 @@ class SassScriptParser {
 	/**
 	 * Replace interpolated SassScript contained in '#{}' with the parsed value.
 	 * @param string the text to interpolate
-	 * @param SassContext the context in which the string is interpolated
+	 * @param Sass_tree_SassContext the context in which the string is interpolated
 	 * @return string the interpolated text
 	 */
 	public function interpolate($string, $context) {
@@ -60,7 +60,7 @@ class SassScriptParser {
 	/**
 	 * Evaluate a SassScript.
 	 * @param string expression to parse
-	 * @param SassContext the context in which the expression is evaluated
+	 * @param Sass_tree_SassContext the context in which the expression is evaluated
 	 * @param	integer the environment in which the expression is evaluated
 	 * @return SassLiteral parsed value
 	 */
@@ -96,7 +96,7 @@ class SassScriptParser {
 	 * Parse SassScript to a set of tokens in RPN
 	 * using the Shunting Yard Algorithm.
 	 * @param string expression to parse
-	 * @param SassContext the context in which the expression is parsed
+	 * @param Sass_tree_SassContext the context in which the expression is parsed
 	 * @param	integer the environment in which the expression is parsed
 	 * @return array tokens in RPN
 	 */

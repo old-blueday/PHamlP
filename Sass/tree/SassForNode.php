@@ -76,7 +76,7 @@ class SassForNode extends SassNode {
 
 	/**
 	 * Parse this node.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return array parsed child nodes
 	 */
 	public function parse($context) {
@@ -89,7 +89,7 @@ class SassForNode extends SassNode {
 			$to += ($from < $to ? 1 : -1);
 		}
 
-		$context = new SassContext($context);
+		$context = new Sass_tree_SassContext($context);
 		for ($i = $from; ($from < $to ? $i < $to : $i > $to); $i = $i + $step) {
 			$context->setVariable($this->variable, new SassNumber($i));
 			$children = array_merge($children, $this->parseChildren($context));

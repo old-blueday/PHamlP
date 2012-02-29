@@ -58,7 +58,7 @@ class SassRootNode extends SassNode {
 	 * Parses this node and its children into the render tree.
 	 * Dynamic nodes are evaluated, files imported, etc.
 	 * Only static nodes for rendering are in the resulting tree.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return SassNode root node of the render tree
 	 */
 	public function parse($context) {
@@ -72,7 +72,7 @@ class SassRootNode extends SassNode {
 	 * @return string the rendered node
 	 */
 	public function render() {
-		$node = $this->parse(new SassContext());
+		$node = $this->parse(new Sass_tree_SassContext());
 		$output = '';
 		foreach ($node->children as $child) {
 			$output .= $child->render();

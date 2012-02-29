@@ -61,7 +61,7 @@ class SassMixinDefinitionNode extends SassNode {
 	/**
 	 * Parse this node.
 	 * Add this mixin to  the current context.
-	 * @param SassContext the context in which this node is parsed
+	 * @param Sass_tree_SassContext the context in which this node is parsed
 	 * @return array the parsed node - an empty array
 	 */
 	public function parse($context) {
