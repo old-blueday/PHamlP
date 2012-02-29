@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassPropertyNode class file.
+ * Sass_tree_SassPropertyNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,12 +10,12 @@
  */
 
 /**
- * SassPropertyNode class.
+ * Sass_tree_SassPropertyNode class.
  * Represents a CSS property.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassPropertyNode extends SassNode {
+class Sass_tree_SassPropertyNode extends Sass_tree_SassNode {
 	const MATCH_PROPERTY_NEW = '/^([^\s=:"]+)\s*(?:(= )|:)(.*?)$/';
 	const MATCH_PROPERTY_OLD = '/^:([^\s=:]+)(?:\s*(=)\s*|\s+|$)(.*)/';
 	const MATCH_PSUEDO_SELECTOR = '/^:?\w[-\w]+\(?/i';
@@ -69,10 +69,10 @@ class SassPropertyNode extends SassNode {
 	protected $value;
 
 	/**
-	 * SassPropertyNode constructor.
+	 * Sass_tree_SassPropertyNode constructor.
 	 * @param object source token
 	 * @param string property syntax
-	 * @return SassPropertyNode
+	 * @return Sass_tree_SassPropertyNode
 	 */
 	public function __construct($token, $syntax = 'new') {
 		parent::__construct($token);
@@ -130,7 +130,7 @@ class SassPropertyNode extends SassNode {
 	public function inNamespace() {
 		$parent = $this->parent;
 		do {
-			if ($parent instanceof SassPropertyNode) {
+			if ($parent instanceof Sass_tree_SassPropertyNode) {
 				return true;
 			}
 			$parent = $parent->parent;
@@ -146,7 +146,7 @@ class SassPropertyNode extends SassNode {
 		$namespace = array();
 		$parent = $this->parent;
 		do {
-			if ($parent instanceof SassPropertyNode) {
+			if ($parent instanceof Sass_tree_SassPropertyNode) {
 				$namespace[] = $parent->name;
 			}
 			$parent = $parent->parent;
@@ -186,7 +186,7 @@ class SassPropertyNode extends SassNode {
 				return false; 
 			}
 	  	if ($token->level === 0) {
-	  		throw new SassPropertyNodeException('Properties can not be assigned at root level', array(), $this);
+	  		throw new Sass_tree_SassPropertyNodeException('Properties can not be assigned at root level', array(), $this);
 	  	}
 	  	else {
 				return true;

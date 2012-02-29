@@ -15,7 +15,7 @@
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class Sass_tree_SassDirectiveNode extends SassNode {
+class Sass_tree_SassDirectiveNode extends Sass_tree_SassNode {
 	const NODE_IDENTIFIER = '@';
 	const MATCH = '/^(@\w+)/';
 

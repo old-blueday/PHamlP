@@ -453,7 +453,7 @@ class Sass_SassParser {
 	 * If caching is enabled a cached version will be used if possible or the
 	 * compiled version cached if not.
 	 * @param string name of source file or Sass source
-	 * @return SassRootNode Root node of document tree
+	 * @return Sass_tree_SassRootNode Root node of document tree
 	 */
 	public function parse($source, $isFile = true) {
 		if ($isFile) {
@@ -490,7 +490,7 @@ class Sass_SassParser {
 	 * Parse Sass source into a document tree.
 	 * If the tree is already created return that.
 	 * @param string Sass source
-	 * @return SassRootNode the root of this document tree
+	 * @return Sass_tree_SassRootNode the root of this document tree
 	 */
 	protected function toTree($source) {
 		if ($this->syntax === SassFile::SASS) {
@@ -501,7 +501,7 @@ class Sass_SassParser {
 			$this->source = $source;
 		}
 		unset($source);
-		$root = new SassRootNode($this);
+		$root = new Sass_tree_SassRootNode($this);
 		$this->buildTree($root);
 		return $root;
 	}
@@ -509,7 +509,7 @@ class Sass_SassParser {
 	/**
 	 * Builds a parse tree under the parent node.
 	 * Called recursivly until the source is parsed.
-	 * @param SassNode the node
+	 * @param Sass_tree_SassNode the node
 	 */
 	protected function buildTree($parent) {
 		$node = $this->getNode($parent);
@@ -521,9 +521,9 @@ class Sass_SassParser {
 	}
 
 	/**
-	 * Creates and returns the next SassNode.
-	 * The tpye of SassNode depends on the content of the SassToken.
-	 * @return SassNode a SassNode of the appropriate type. Null when no more
+	 * Creates and returns the next Sass_tree_SassNode.
+	 * The tpye of Sass_tree_SassNode depends on the content of the SassToken.
+	 * @return Sass_tree_SassNode a Sass_tree_SassNode of the appropriate type. Null when no more
 	 * source to parse.
 	 */
 	protected function getNode($node) {
@@ -536,23 +536,23 @@ class Sass_SassParser {
 			case Sass_tree_SassCommentNode::isa($token):
 				return new Sass_tree_SassCommentNode($token);
 				break;
-			case SassVariableNode::isa($token):
-				return new SassVariableNode($token);
+			case Sass_tree_SassVariableNode::isa($token):
+				return new Sass_tree_SassVariableNode($token);
 				break;
-			case SassPropertyNode::isa($token, $this->property_syntax):
-				return new SassPropertyNode($token, $this->property_syntax);
+			case Sass_tree_SassPropertyNode::isa($token, $this->property_syntax):
+				return new Sass_tree_SassPropertyNode($token, $this->property_syntax);
 				break;
-			case SassMixinDefinitionNode::isa($token):
+			case Sass_tree_SassMixinDefinitionNode::isa($token):
 				if ($this->syntax === SassFile::SCSS) {
 					throw new Sass_SassException('Mixin {which} shortcut not allowed in SCSS', array('{which}'=>'definition'), $this);
 				}
-				return new SassMixinDefinitionNode($token);
+				return new Sass_tree_SassMixinDefinitionNode($token);
 				break;
-			case SassMixinNode::isa($token):
+			case Sass_tree_SassMixinNode::isa($token):
 				if ($this->syntax === SassFile::SCSS) {
 					throw new Sass_SassException('Mixin {which} shortcut not allowed in SCSS', array('{which}'=>'include'), $this);
 				}
-				return new SassMixinNode($token);
+				return new Sass_tree_SassMixinNode($token);
 				break;
 			default:
 				return new SassRuleNode($token);
@@ -767,8 +767,8 @@ class Sass_SassParser {
 	/**
 	 * Parses a directive
 	 * @param SassToken token to parse
-	 * @param SassNode parent node
-	 * @return SassNode a Sass directive node
+	 * @param Sass_tree_SassNode parent node
+	 * @return Sass_tree_SassNode a Sass directive node
 	 */
 	protected function parseDirective($token, $parent) {
 		switch (Sass_tree_SassDirectiveNode::extractDirective($token)) {
@@ -776,10 +776,10 @@ class Sass_SassParser {
 				return new Sass_tree_SassExtendNode($token);
 				break;
 			case '@mixin':
-				return new SassMixinDefinitionNode($token);
+				return new Sass_tree_SassMixinDefinitionNode($token);
 				break;
 			case '@include':
-				return new SassMixinNode($token);
+				return new Sass_tree_SassMixinNode($token);
 				break;
 			case '@import':
 				if ($this->syntax == SassFile::SASS) {
@@ -792,20 +792,20 @@ class Sass_SassParser {
 						throw new Sass_SassException('Nesting not allowed beneath {what}', array('{what}'=>'@import directive'), $token);
 					}
 				}
-				return new SassImportNode($token);
+				return new Sass_tree_SassImportNode($token);
 				break;
 			case '@for':
-				return new SassForNode($token);
+				return new Sass_tree_SassForNode($token);
 				break;
 			case '@if':
-				return new SassIfNode($token);
+				return new Sass_tree_SassIfNode($token);
 				break;
 			case '@else': // handles else and else if directives
 				return new Sass_tree_SassElseNode($token);
 				break;
 			case '@do':
 			case '@while':
-				return new SassWhileNode($token);
+				return new Sass_tree_SassWhileNode($token);
 				break;
 			case '@debug':
 				return new Sass_tree_SassDebugNode($token);

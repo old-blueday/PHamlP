@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassVariableNode class file.
+ * Sass_tree_SassVariableNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,12 +10,12 @@
  */
 
 /**
- * SassVariableNode class.
+ * Sass_tree_SassVariableNode class.
  * Represents a variable.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassVariableNode extends SassNode {
+class Sass_tree_SassVariableNode extends Sass_tree_SassNode {
 	const MATCH = '/^([!$])([\w-]+)\s*:?\s*((\|\|)?=)?\s*(.+?)\s*(!default)?;?$/i';
 	const IDENTIFIER = 1;
 	const NAME = 2;
@@ -40,15 +40,15 @@ class SassVariableNode extends SassNode {
 	protected $isDefault;
 
 	/**
-	 * SassVariableNode constructor.
+	 * Sass_tree_SassVariableNode constructor.
 	 * @param object source token
-	 * @return SassVariableNode
+	 * @return Sass_tree_SassVariableNode
 	 */
 	public function __construct($token) {
 		parent::__construct($token);
 		preg_match(self::MATCH, $token->source, $matches);
 		if (empty($matches[self::NAME]) || ($matches[self::VALUE] === '')) {
-			throw new SassVariableNodeException('Invalid variable definition; name and expression required', array(), $this);			
+			throw new Sass_tree_SassVariableNodeException('Invalid variable definition; name and expression required', array(), $this);			
 		}
 		$this->name = $matches[self::NAME];
 		$this->value = $matches[self::VALUE];
@@ -58,8 +58,8 @@ class SassVariableNode extends SassNode {
 		if ($matches[self::IDENTIFIER] === self::SASS_IDENTIFIER) {
 			$this->addWarning('Variables prefixed with "!" is deprecated; use "${name}"', array('{name}'=>$this->name));
 		}
-		if (!empty($matches[SassVariableNode::SASS_ASSIGNMENT])) {
-			$this->addWarning('Setting variables with "{sassDefault}=" is deprecated; use "${name}: {value}{scssDefault}"', array('{sassDefault}'=>(!empty($matches[SassVariableNode::SASS_DEFAULT])?'||':''), '{name}'=>$this->name, '{value}'=>$this->value, '{scssDefault}'=>(!empty($matches[SassVariableNode::SASS_DEFAULT])?' !default':'')));
+		if (!empty($matches[Sass_tree_SassVariableNode::SASS_ASSIGNMENT])) {
+			$this->addWarning('Setting variables with "{sassDefault}=" is deprecated; use "${name}: {value}{scssDefault}"', array('{sassDefault}'=>(!empty($matches[Sass_tree_SassVariableNode::SASS_DEFAULT])?'||':''), '{name}'=>$this->name, '{value}'=>$this->value, '{scssDefault}'=>(!empty($matches[Sass_tree_SassVariableNode::SASS_DEFAULT])?' !default':'')));
 		}		
 	}
 

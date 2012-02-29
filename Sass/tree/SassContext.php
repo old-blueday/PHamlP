@@ -31,7 +31,7 @@ class Sass_tree_SassContext {
 	 */
 	protected $variables = array();
 	/**
-	 * @var SassNode the node being processed
+	 * @var Sass_tree_SassNode the node being processed
 	 */
 	public $node;
 
@@ -47,7 +47,7 @@ class Sass_tree_SassContext {
 	/**
 	 * Adds a mixin
 	 * @param string name of mixin
-	 * @return SassMixinDefinitionNode the mixin
+	 * @return Sass_tree_SassMixinDefinitionNode the mixin
 	 */
 	public function addMixin($name, $mixin) {
 		$this->mixins[$name] = $mixin;
@@ -57,8 +57,8 @@ class Sass_tree_SassContext {
 	/**
 	 * Returns a mixin
 	 * @param string name of mixin to return
-	 * @return SassMixinDefinitionNode the mixin
-	 * @throws SassContextException if mixin not defined in this context
+	 * @return Sass_tree_SassMixinDefinitionNode the mixin
+	 * @throws Sass_tree_SassContextException if mixin not defined in this context
 	 */
 	public function getMixin($name) {
 		if (isset($this->mixins[$name])) {
@@ -67,14 +67,14 @@ class Sass_tree_SassContext {
 		elseif (!empty($this->parent)) {
 			return $this->parent->getMixin($name);
 		}
-		throw new SassContextException('Undefined {what}: {name}', array('{what}'=>'Mixin', '{name}'=>$name), $this->node);
+		throw new Sass_tree_SassContextException('Undefined {what}: {name}', array('{what}'=>'Mixin', '{name}'=>$name), $this->node);
 	}
 
 	/**
 	 * Returns a variable defined in this context
 	 * @param string name of variable to return
 	 * @return string the variable
-	 * @throws SassContextException if variable not defined in this context
+	 * @throws Sass_tree_SassContextException if variable not defined in this context
 	 */
 	public function getVariable($name) {
 		if (isset($this->variables[$name])) {
@@ -84,7 +84,7 @@ class Sass_tree_SassContext {
 			return $this->parent->getVariable($name);
 		}
 		else {
-			throw new SassContextException('Undefined {what}: {name}', array('{what}'=>'Variable', '{name}'=>$name), $this->node);
+			throw new Sass_tree_SassContextException('Undefined {what}: {name}', array('{what}'=>'Variable', '{name}'=>$name), $this->node);
 		}
 	}
 

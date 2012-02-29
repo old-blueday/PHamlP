@@ -43,7 +43,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 	 * Renders a comment.
 	 * Comments preceeding a rule are on their own line.
 	 * Comments within a rule are on the same line as the rule.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @return string the rendered commnt
 	 */
 	public function renderComment($node) {
@@ -53,7 +53,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 
 	/**
 	 * Renders a directive.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @param array properties of the directive
 	 * @return string the rendered directive
 	 */
@@ -64,7 +64,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 
 	/**
 	 * Renders properties.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @param array properties to render
 	 * @return string the rendered properties
 	 */
@@ -74,7 +74,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 
 	/**
 	 * Renders a property.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @return string the rendered property
 	 */
 	public function renderProperty($node) {
@@ -83,7 +83,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 
 	/**
 	 * Renders a rule.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @param array rule properties
 	 * @param string rendered rules
 	 * @return string the rendered rule
@@ -100,7 +100,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 	 * {@link https://addons.mozilla.org/en-US/firefox/addon/103988/ FireSass}.
 	 * Else if the node has the line_numbers option set true the line number and
 	 * filename are rendered in a comment.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @return string the debug information
 	 */
 	protected function renderDebug($node) {
@@ -121,7 +121,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 
 	/**
 	 * Renders rule selectors.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @return string the rendered selectors
 	 */
 	protected function renderSelectors($node) {

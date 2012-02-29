@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassNode class file.
+ * Sass_tree_SassNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -28,18 +28,18 @@ require_once('SassWhileNode.php');
 require_once('SassNodeExceptions.php');
 
 /**
- * SassNode class.
+ * Sass_tree_SassNode class.
  * Base class for all Sass nodes.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassNode {
+class Sass_tree_SassNode {
 	/**
-	 * @var SassNode parent of this node
+	 * @var Sass_tree_SassNode parent of this node
 	 */
 	protected $parent;
 	/**
-	 * @var SassNode root node
+	 * @var Sass_tree_SassNode root node
 	 */
 	protected $root;
 	/**
@@ -54,7 +54,7 @@ class SassNode {
 	/**
 	 * Constructor.
 	 * @param object source token
-	 * @return SassNode
+	 * @return Sass_tree_SassNode
 	 */
 	public function __construct($token) {
 		$this->token = $token;
@@ -70,14 +70,14 @@ class SassNode {
 		if (method_exists($this, $getter)) {
 			return $this->$getter();
 		}
-		throw new SassNodeException('No getter function for {what}', array('{what}'=>$name), $this);
+		throw new Sass_tree_SassNodeException('No getter function for {what}', array('{what}'=>$name), $this);
 	}
 
 	/**
 	 * Setter.
 	 * @param string name of property to set
 	 * @return mixed value of property
-	 * @return SassNode this node
+	 * @return Sass_tree_SassNode this node
 	 */
 	public function __set($name, $value) {
 		$setter = 'set' . ucfirst($name);
@@ -85,7 +85,7 @@ class SassNode {
 			$this->$setter($value);
 			return $this;
 		}
-		throw new SassNodeException('No setter function for {what}', array('{what}'=>$name), $this);
+		throw new Sass_tree_SassNodeException('No setter function for {what}', array('{what}'=>$name), $this);
 	}
 
 	/**
@@ -114,11 +114,11 @@ class SassNode {
 
 	/**
 	 * Adds a child to this node.
-	 * @return SassNode the child to add
+	 * @return Sass_tree_SassNode the child to add
 	 */
 	public function addChild($child) {
 		if ($child instanceof Sass_tree_SassElseNode) {
-			if (!$this->lastChild instanceof SassIfNode) {
+			if (!$this->lastChild instanceof Sass_tree_SassIfNode) {
 				throw new Sass_SassException('@else(if) directive must come after @(else)if', array(), $child);
 			}
 			$this->lastChild->addElse($child);
@@ -162,7 +162,7 @@ class SassNode {
 
 	/**
 	 * Returns the last child node of this node.
-	 * @return SassNode the last child node of this node
+	 * @return Sass_tree_SassNode the last child node of this node
 	 */
 	public function getLastChild() {
 	  return $this->children[count($this->children) - 1];
@@ -278,12 +278,12 @@ class SassNode {
 	 * @param boolean true if this node is in a SassScript directive, false if not
 	 */
 	public function inSassScriptDirective() {
-		return $this->parent instanceof SassForNode ||
-				$this->parent->parent instanceof SassForNode ||
-				$this->parent instanceof SassIfNode ||
-				$this->parent->parent instanceof SassIfNode ||
-				$this->parent instanceof SassWhileNode ||
-				$this->parent->parent instanceof SassWhileNode;
+		return $this->parent instanceof Sass_tree_SassForNode ||
+				$this->parent->parent instanceof Sass_tree_SassForNode ||
+				$this->parent instanceof Sass_tree_SassIfNode ||
+				$this->parent->parent instanceof Sass_tree_SassIfNode ||
+				$this->parent instanceof Sass_tree_SassWhileNode ||
+				$this->parent->parent instanceof Sass_tree_SassWhileNode;
 	}
 
 	/**
@@ -337,6 +337,6 @@ class SassNode {
 	 * @return boolean true if the token represents this type of node, false if not
 	 */
 	public static function isa($token) {
-		throw new SassNodeException('Child classes must override this method');
+		throw new Sass_tree_SassNodeException('Child classes must override this method');
 	}
 }

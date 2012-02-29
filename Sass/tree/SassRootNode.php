@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassRootNode class file.
+ * Sass_tree_SassRootNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -13,12 +13,12 @@ require_once(dirname(__FILE__).'/../script/SassScriptParser.php');
 require_once(dirname(__FILE__).'/../renderers/SassRenderer.php');
 
 /**
- * SassRootNode class.
+ * Sass_tree_SassRootNode class.
  * Also the root node of a document.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassRootNode extends SassNode {
+class Sass_tree_SassRootNode extends Sass_tree_SassNode {
 	/**
 	 * @var SassScriptParser SassScript parser
 	 */
@@ -37,9 +37,9 @@ class SassRootNode extends SassNode {
 	protected $extenders = array();
 
 	/**
-	 * Root SassNode constructor.
+	 * Root Sass_tree_SassNode constructor.
 	 * @param Sass_SassParser Sass parser
-	 * @return SassNode
+	 * @return Sass_tree_SassNode
 	 */
 	public function __construct($parser) { 
 		parent::__construct((object) array(
@@ -59,7 +59,7 @@ class SassRootNode extends SassNode {
 	 * Dynamic nodes are evaluated, files imported, etc.
 	 * Only static nodes for rendering are in the resulting tree.
 	 * @param Sass_tree_SassContext the context in which this node is parsed
-	 * @return SassNode root node of the render tree
+	 * @return Sass_tree_SassNode root node of the render tree
 	 */
 	public function parse($context) {
 		$node = clone $this;
@@ -92,9 +92,9 @@ class SassRootNode extends SassNode {
 	/**
 	 * Returns a value indicating if the line represents this type of node.
 	 * Child classes must override this method.
-	 * @throws SassNodeException if not overriden
+	 * @throws Sass_tree_SassNodeException if not overriden
 	 */
 	public static function isa($line) {
-		throw new SassNodeException('Child classes must override this method');
+		throw new Sass_tree_SassNodeException('Child classes must override this method');
 	}
 }

@@ -35,8 +35,8 @@ class SassCompressedRenderer extends SassRenderer {
 
 	/**
 	 * Returns the indent string for the node
-	 * @param SassNode the node to return the indent string for
-	 * @return string the indent string for this SassNode
+	 * @param Sass_tree_SassNode the node to return the indent string for
+	 * @return string the indent string for this Sass_tree_SassNode
 	 */
 	protected function getIndent($node) {
 		return '';
@@ -44,7 +44,7 @@ class SassCompressedRenderer extends SassRenderer {
 
 	/**
 	 * Renders a comment.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @return string the rendered comment
 	 */
 	public function renderComment($node) {
@@ -53,7 +53,7 @@ class SassCompressedRenderer extends SassRenderer {
 
 	/**
 	 * Renders a directive.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @param array properties of the directive
 	 * @return string the rendered directive
 	 */
@@ -63,7 +63,7 @@ class SassCompressedRenderer extends SassRenderer {
 
 	/**
 	 * Renders properties.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @param array properties to render
 	 * @return string the rendered properties
 	 */
@@ -73,7 +73,7 @@ class SassCompressedRenderer extends SassRenderer {
 
 	/**
 	 * Renders a property.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @return string the rendered property
 	 */
 	public function renderProperty($node) {
@@ -82,7 +82,7 @@ class SassCompressedRenderer extends SassRenderer {
 
 	/**
 	 * Renders a rule.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @param array rule properties
 	 * @param string rendered rules
 	 * @return string the rendered directive
@@ -93,7 +93,7 @@ class SassCompressedRenderer extends SassRenderer {
 
 	/**
 	 * Renders the rule's selectors
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @return string the rendered selectors
 	 */
 	protected function renderSelectors($node) {

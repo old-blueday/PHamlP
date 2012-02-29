@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassWhileNode class file.
+ * Sass_tree_SassWhileNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,12 +10,12 @@
  */
 
 /**
- * SassWhileNode class.
+ * Sass_tree_SassWhileNode class.
  * Represents a Sass @while loop and a Sass @do loop.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassWhileNode extends SassNode {
+class Sass_tree_SassWhileNode extends Sass_tree_SassNode {
 	const MATCH = '/^@(do|while)\s+(.+)$/i';
 	const LOOP = 1;
 	const EXPRESSION = 2;
@@ -31,15 +31,15 @@ class SassWhileNode extends SassNode {
 	protected $expression;
 
 	/**
-	 * SassWhileNode constructor.
+	 * Sass_tree_SassWhileNode constructor.
 	 * @param object source token
-	 * @return SassWhileNode
+	 * @return Sass_tree_SassWhileNode
 	 */
 	public function __construct($token) {
 		parent::__construct($token);
 		preg_match(self::MATCH, $token->source, $matches);
 		$this->expression = $matches[self::EXPRESSION];
-		$this->isDo = ($matches[self::LOOP] === SassWhileNode::IS_DO);
+		$this->isDo = ($matches[self::LOOP] === Sass_tree_SassWhileNode::IS_DO);
 	}
 
 	/**

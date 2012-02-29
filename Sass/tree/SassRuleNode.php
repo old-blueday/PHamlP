@@ -15,7 +15,7 @@
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassRuleNode extends SassNode {
+class SassRuleNode extends Sass_tree_SassNode {
 	const MATCH = '/^(.+?)(?:\s*\{)?$/';
 	const SELECTOR = 1;
 	const CONTINUED = ',';
@@ -283,7 +283,7 @@ class SassRuleNode extends SassNode {
 	protected function resolveParentReferences($selector, $context) {
 		$resolvedReferences = array(); 
 		if (!count($this->parentSelectors)) {
-			throw new SassRuleNodeException('Can not use parent selector (' .
+			throw new Sass_tree_SassRuleNodeException('Can not use parent selector (' .
 					self::PARENT_REFERENCE . ') when no parent selectors', array(), $this);
 		}
 		foreach ($this->getParentSelectors($context) as $parentSelector) {

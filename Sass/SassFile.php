@@ -28,7 +28,7 @@ class SassFile {
 	 * parsed file will be cached.
 	 * @param string filename to parse
 	 * @param Sass_SassParser Sass parser
-	 * @return SassRootNode
+	 * @return Sass_tree_SassRootNode
 	 */
 	public static function getTree($filename, $parser) {
 		if ($parser->cache) {
@@ -143,7 +143,7 @@ class SassFile {
 
 	/**
 	 * Saves a cached version of the file.
-	 * @param SassRootNode Sass tree to save
+	 * @param Sass_tree_SassRootNode Sass tree to save
 	 * @param string filename to save
 	 * @param string path to cache location
 	 * @return mixed the cached file if available or false if it is not

@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassMixinNode class file.
+ * Sass_tree_SassMixinNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,12 +10,12 @@
  */
 
 /**
- * SassMixinNode class.
+ * Sass_tree_SassMixinNode class.
  * Represents a Mixin.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassMixinNode extends SassNode {
+class Sass_tree_SassMixinNode extends Sass_tree_SassNode {
 	const NODE_IDENTIFIER = '+';
 	const MATCH = '/^(\+|@include\s+)([-\w]+)\s*(?:\((.*?)\))?$/i';
 	const IDENTIFIER = 1;
@@ -32,9 +32,9 @@ class SassMixinNode extends SassNode {
 	protected $args = array();
 
 	/**
-	 * SassMixinDefinitionNode constructor.
+	 * Sass_tree_SassMixinDefinitionNode constructor.
 	 * @param object source token
-	 * @return SassMixinNode
+	 * @return Sass_tree_SassMixinNode
 	 */
 	public function __construct($token) {
 		parent::__construct($token);
@@ -66,7 +66,7 @@ class SassMixinNode extends SassNode {
 				$context->setVariable($name, $this->evaluate($value, $context));
 			}
 			else {
-				throw new SassMixinNodeException("Mixin::{mname}: Required variable ({vname}) not given.\nMixin defined: {dfile}::{dline}\nMixin used", array('{vname}'=>$name, '{mname}'=>$this->name, '{dfile}'=>$mixin->token->filename, '{dline}'=>$mixin->token->line), $this);
+				throw new Sass_tree_SassMixinNodeException("Mixin::{mname}: Required variable ({vname}) not given.\nMixin defined: {dfile}::{dline}\nMixin used", array('{vname}'=>$name, '{mname}'=>$this->name, '{dfile}'=>$mixin->token->filename, '{dline}'=>$mixin->token->line), $this);
 			}
 		} // foreach
 

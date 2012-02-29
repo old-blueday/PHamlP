@@ -16,7 +16,7 @@
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class Sass_tree_SassElseNode extends SassIfNode {
+class Sass_tree_SassElseNode extends Sass_tree_SassIfNode {
 	/**
 	 * Sass_tree_SassElseNode constructor.
 	 * @param object source token

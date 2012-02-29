@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassImportNode class file.
+ * Sass_tree_SassImportNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,12 +10,12 @@
  */
 
 /**
- * SassImportNode class.
+ * Sass_tree_SassImportNode class.
  * Represents a CSS Import.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassImportNode extends SassNode {
+class Sass_tree_SassImportNode extends Sass_tree_SassNode {
 	const IDENTIFIER = '@';
 	const MATCH = '/^@import\s+(.+)/i';
 	const MATCH_CSS = '/^(.+\.css|url\(.+\)|.+" \w+|"http)/im';
@@ -27,9 +27,9 @@ class SassImportNode extends SassNode {
 	protected $files = array();
 
 	/**
-	 * SassImportNode.
+	 * Sass_tree_SassImportNode.
 	 * @param object source token
-	 * @return SassImportNode
+	 * @return Sass_tree_SassImportNode
 	 */
 	public function __construct($token) {
 		parent::__construct($token);
@@ -57,7 +57,7 @@ class SassImportNode extends SassNode {
 				$tree = SassFile::getTree(
 					SassFile::getFile($file, $this->parser), $this->parser);
 				if (empty($tree)) {
-					throw new SassImportNodeException('Unable to create document tree for {file}', array('{file}'=>$file), $this);
+					throw new Sass_tree_SassImportNodeException('Unable to create document tree for {file}', array('{file}'=>$file), $this);
 				}
 				else {
 					$imported = array_merge($imported, $tree->parse($context)->children);

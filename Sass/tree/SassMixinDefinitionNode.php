@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassMixinDefinitionNode class file.
+ * Sass_tree_SassMixinDefinitionNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,12 +10,12 @@
  */
 
 /**
- * SassMixinDefinitionNode class.
+ * Sass_tree_SassMixinDefinitionNode class.
  * Represents a Mixin definition.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassMixinDefinitionNode extends SassNode {
+class Sass_tree_SassMixinDefinitionNode extends Sass_tree_SassNode {
 	const NODE_IDENTIFIER = '=';
 	const MATCH = '/^(=|@mixin\s+)([-\w]+)\s*(?:\((.+?)\))?\s*$/i';
 	const IDENTIFIER = 1;
@@ -33,18 +33,18 @@ class SassMixinDefinitionNode extends SassNode {
 	protected $args = array();
 
 	/**
-	 * SassMixinDefinitionNode constructor.
+	 * Sass_tree_SassMixinDefinitionNode constructor.
 	 * @param object source token
-	 * @return SassMixinDefinitionNode
+	 * @return Sass_tree_SassMixinDefinitionNode
 	 */
 	public function __construct($token) {
   	if ($token->level !== 0) {
-			throw new SassMixinDefinitionNodeException('Mixins can only be defined at root level', array(), $this);
+			throw new Sass_tree_SassMixinDefinitionNodeException('Mixins can only be defined at root level', array(), $this);
 	 	}
 		parent::__construct($token);
 		preg_match(self::MATCH, $token->source, $matches);
 		if (empty($matches)) {
-			throw new SassMixinDefinitionNodeException('Invalid {what}', array('{what}'=>'Mixin'), $this);
+			throw new Sass_tree_SassMixinDefinitionNodeException('Invalid {what}', array('{what}'=>'Mixin'), $this);
 		}
 		$this->name = $matches[self::NAME];
 	  if (isset($matches[self::ARGUMENTS])) {

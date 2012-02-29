@@ -38,7 +38,7 @@ class SassExpandedRenderer extends SassCompactRenderer {
 
 	/**
 	 * Renders a comment.
-	 * @param SassNode the node being rendered
+	 * @param Sass_tree_SassNode the node being rendered
 	 * @return string the rendered commnt
 	 */
 	public function renderComment($node) {

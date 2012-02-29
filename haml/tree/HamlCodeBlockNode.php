@@ -30,8 +30,8 @@ class HamlCodeBlockNode extends HamlNode {
 
 	/**
 	 * Adds an "else" statement to this node.
-	 * @param SassIfNode "else" statement node to add
-	 * @return SassIfNode this node
+	 * @param Sass_tree_SassIfNode "else" statement node to add
+	 * @return Sass_tree_SassIfNode this node
 	 */
 	public function addElse($node) {
 	  if (is_null($this->else)) {
