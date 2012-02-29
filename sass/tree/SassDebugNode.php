@@ -23,16 +23,16 @@ class SassDebugNode extends SassNode {
 	/**
 	 * @var string the debug/warning message
 	 */
-	private $message;
+	protected $message;
 	/**
 	 * @var array parameters for the message;
 	 * only used by internal warning messages
 	 */
-	private $params;
+	protected $params;
 	/**
 	 * @var boolean true if this is a warning
 	 */
-	private $warning;
+	protected $warning;
 
 	/**
 	 * SassDebugNode.

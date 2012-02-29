@@ -62,19 +62,19 @@ class SassScriptOperation {
 	/**
 	 * @var string operator for this operation
 	 */
-	private $operator;
+	protected $operator;
 	/**
 	 * @var string associativity of the operator; left or right
 	 */
-	private $associativity;
+	protected $associativity;
 	/**
 	 * @var integer precedence of the operator
 	 */
-	private $precedence;
+	protected $precedence;
 	/**
 	 * @var integer number of operands required by the operator
 	 */
-	private $operandCount;
+	protected $operandCount;
 
 	/**
 	 * SassScriptOperation constructor

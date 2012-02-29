@@ -25,11 +25,11 @@ class SassMixinNode extends SassNode {
 	/**
 	 * @var string name of the mixin
 	 */
-	private $name;
+	protected $name;
 	/**
 	 * @var array arguments for the mixin
 	 */
-	private $args = array();
+	protected $args = array();
 
 	/**
 	 * SassMixinDefinitionNode constructor.

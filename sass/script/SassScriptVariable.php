@@ -23,7 +23,7 @@ class SassScriptVariable {
 	/**
 	 * @var string name of variable
 	 */
-	private $name;
+	protected $name;
 
 	/**
 	 * SassVariable constructor

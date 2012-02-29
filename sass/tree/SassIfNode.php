@@ -25,11 +25,11 @@ class SassIfNode extends SassNode {
 	/**
 	 * @var SassIfNode the next else node.
 	 */
-	private $else;
+	protected $else;
 	/**
 	 * @var string expression to evaluate
 	 */
-	private $expression;
+	protected $expression;
 
 	/**
 	 * SassIfNode constructor.
@@ -89,7 +89,7 @@ class SassIfNode extends SassNode {
 	 * @return true if this node is an "else" node, false if this node is an "if"
 	 * or "else if" node
 	 */
-	private function isElse() {
+	protected function isElse() {
 	  return empty($this->expression);
 	}
 }

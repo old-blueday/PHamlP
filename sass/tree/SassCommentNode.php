@@ -20,7 +20,7 @@ class SassCommentNode extends SassNode {
 	const MATCH = '%^/\*\s*(.*?)\s*(\*/)?$%s';
 	const COMMENT = 1;
 	
-	private $value; 
+	protected $value; 
 	
 	/**
 	 * SassCommentNode constructor.

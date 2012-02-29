@@ -56,21 +56,21 @@ class SassParser {
 	 * @see indentChars
 	 * @see indentSpaces
 	 */
-	private $indentChar;
+	protected $indentChar;
 	/**
 	 * @var array allowable characters for indenting
 	 */
-	private $indentChars = array(' ', "\t");
+	protected $indentChars = array(' ', "\t");
 	/**
 	 * @var integer number of spaces for indentation.
 	 * Used to calculate {@link Level} if {@link indentChar} is space.
 	 */
-	private $indentSpaces = 2;
+	protected $indentSpaces = 2;
 	
 	/**
 	 * @var string source
 	 */
-	private $source;
+	protected $source;
 	 
 	/**#@+
 	 * Option
@@ -82,7 +82,7 @@ class SassParser {
 	 * 
 	 * Defaults to true.
 	 */
-	private $cache;
+	protected $cache;
 	
 	/**
 	 * cache_location:
@@ -90,7 +90,7 @@ class SassParser {
 	 * 
 	 * Defaults to './sass-cache'.
 	 */
-	private $cache_location;
+	protected $cache_location;
 	
 	/**
 	 * css_location:
@@ -98,7 +98,7 @@ class SassParser {
 	 * 
 	 * Defaults to './css'.
 	 */
-	private $css_location;
+	protected $css_location;
 	
 	/**
 	 * debug_info:
@@ -111,7 +111,7 @@ class SassParser {
 	 * Defaults to false.
 	 * @see style
 	 */
-	private $debug_info;
+	protected $debug_info;
 	
 	/**
 	 * extensions:
@@ -133,7 +133,7 @@ class SassParser {
 	 * @var array An array of filesystem paths which should be searched for
 	 * SassScript functions.
 	 */
-	private $function_paths;
+	protected $function_paths;
 	
 	/**
 	 * line:
@@ -143,7 +143,7 @@ class SassParser {
 	 * 
 	 * Defaults to 1. 
 	 */
-	private $line;
+	protected $line;
 	
 	/**
 	 * line_numbers:
@@ -165,7 +165,7 @@ class SassParser {
 	 * 
 	 * Defaults to './sass-templates'.
 	 */
-	private $load_paths;
+	protected $load_paths;
 	
 	/**
 	 * property_syntax: 
@@ -181,14 +181,14 @@ class SassParser {
 	 * 
 	 * Ignored for SCSS files which alaways use the new style.
 	 */
-	private $property_syntax;
+	protected $property_syntax;
 	
 	/**
 	 * quiet:
 	 * @var boolean When set to true, causes warnings to be disabled.
 	 * Defaults to false.
 	 */
-	private $quiet;
+	protected $quiet;
 	
 	/**
 	 * style:
@@ -211,7 +211,7 @@ class SassParser {
 	 * 
 	 * Defaults to 'nested'.
 	 */
-	private $style;
+	protected $style;
 	
 	/**
 	 * syntax:
@@ -220,14 +220,14 @@ class SassParser {
 	 * 
 	 * This is set automatically when parsing a file, else defaults to 'sass'.
 	 */
-	private $syntax;
+	protected $syntax;
 
 	/**
 	 * template_location:
 	 * @var string Path to the root sass template directory for your
 	 * application.
 	 */
-	private $template_location;
+	protected $template_location;
 
 	/**
 	 * vendor_properties:
@@ -240,7 +240,7 @@ class SassParser {
 	 * Defaults to vendor_properties disabled.
 	 * @see _vendorProperties
 	 */
-	private $vendor_properties = array();
+	protected $vendor_properties = array();
 	
 	/**#@-*/
 	/**
@@ -248,7 +248,7 @@ class SassParser {
 	 * @var array built-in vendor properties
 	 * @see vendor_properties
 	 */
-	private $_vendorProperties = array(
+	protected $_vendorProperties = array(
 		'border-radius' => array(
 			'-moz-border-radius',
 			'-webkit-border-radius',
@@ -492,7 +492,7 @@ class SassParser {
 	 * @param string Sass source
 	 * @return SassRootNode the root of this document tree
 	 */
-	private function toTree($source) {
+	protected function toTree($source) {
 		if ($this->syntax === SassFile::SASS) {
 			$this->source = explode("\n", $source);
 			$this->setIndentChar();
@@ -511,7 +511,7 @@ class SassParser {
 	 * Called recursivly until the source is parsed.
 	 * @param SassNode the node
 	 */
-	private function buildTree($parent) {
+	protected function buildTree($parent) {
 		$node = $this->getNode($parent);
 		while (is_object($node) && $node->isChildOf($parent)) {
 			$parent->addChild($node);
@@ -526,7 +526,7 @@ class SassParser {
 	 * @return SassNode a SassNode of the appropriate type. Null when no more
 	 * source to parse.
 	 */
-	private function getNode($node) {
+	protected function getNode($node) {
 		$token = $this->getToken();
 		if (empty($token)) return null;
 		switch (true) {
@@ -565,7 +565,7 @@ class SassParser {
 	 * meta data about it.
 	 * @return object
 	 */
-	private function getToken() {
+	protected function getToken() {
 		return ($this->syntax === SassFile::SASS ? $this->sass2Token() : $this->scss2Token());
 	}
 	
@@ -576,7 +576,7 @@ class SassParser {
 	 * CSS comments and selectors, are assembled into a single statement.
 	 * @return object Statement token. Null if end of source. 
 	 */
-	private function sass2Token() {
+	protected function sass2Token() {
 		$statement = ''; // source line being tokenised
 		$token = null;
 		
@@ -644,7 +644,7 @@ class SassParser {
 	 * @return integer the level of the source
 	 * @throws Exception if the source indentation is invalid
 	 */
-	private function getLevel($source) {
+	protected function getLevel($source) {
 		$indent = strlen($source) - strlen(ltrim($source));
 		$level = $indent/$this->indentSpaces;
 		if (!is_int($level) ||
@@ -660,7 +660,7 @@ class SassParser {
 	 * about it from SCSS source.
 	 * @return object Statement token. Null if end of source. 
 	 */
-	private function scss2Token() {
+	protected function scss2Token() {
 		static $srcpos = 0; // current position in the source stream
 		static $srclen; // the length of the source stream
 		
@@ -742,7 +742,7 @@ class SassParser {
 	 * @param string source statement
 	 * @return SassToken
 	 */
-	private function createToken($statement) {
+	protected function createToken($statement) {
 		static $level = 0;
 		
 		$this->line += substr_count($statement, "\n");
@@ -770,7 +770,7 @@ class SassParser {
 	 * @param SassNode parent node
 	 * @return SassNode a Sass directive node
 	 */
-	private function parseDirective($token, $parent) {
+	protected function parseDirective($token, $parent) {
 		switch (SassDirectiveNode::extractDirective($token)) {
 			case '@extend':
 				return new SassExtendNode($token);
@@ -828,7 +828,7 @@ class SassParser {
 	 * @throws SassException if the indent is mixed or
 	 * the indent character can not be determined
 	 */
-	private function setIndentChar() {
+	protected function setIndentChar() {
 		foreach ($this->source as $l=>$source) {
 			if (!empty($source) && in_array($source[0], $this->indentChars)) {
 				$this->indentChar = $source[0];

@@ -29,15 +29,15 @@ class SassVariableNode extends SassNode {
 	/**
 	 * @var string name of the variable
 	 */
-	private $name;
+	protected $name;
 	/**
 	 * @var string value of the variable or expression to evaluate
 	 */
-	private $value;
+	protected $value;
 	/**
 	 * @var boolean whether the variable is optionally assigned
 	 */
-	private $isDefault;
+	protected $isDefault;
 
 	/**
 	 * SassVariableNode constructor.

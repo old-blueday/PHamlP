@@ -28,22 +28,22 @@ class SassRuleNode extends SassNode {
 	/**
 	 * @var array selector(s)
 	 */
-	private $selectors = array();
+	protected $selectors = array();
 
 	/**
 	 * @var array parent selectors
 	 */
-	private $parentSelectors = array();
+	protected $parentSelectors = array();
 
 	/**
 	 * @var array resolved selectors
 	 */
-	private $resolvedSelectors = array();
+	protected $resolvedSelectors = array();
 	
 	/**
 	 * @var boolean whether the node expects more selectors
 	 */
-	private $isContinued;
+	protected $isContinued;
 
 	/**
 	 * SassRuleNode constructor.
@@ -146,7 +146,7 @@ class SassRuleNode extends SassNode {
 	 * @param string selector to test
 	 * @return boolean true if the selector is a psuedo selector, false if not
 	 */
-	private function isPsuedo($selector) {
+	protected function isPsuedo($selector) {
 		return strpos($selector, ':') !== false;
 	}
 	
@@ -155,7 +155,7 @@ class SassRuleNode extends SassNode {
 	 * @param string selector to test
 	 * @return boolean true if the selector is a sequence selector, false if not
 	 */
-	private function isSequence($selector) {
+	protected function isSequence($selector) {
 		return strpos($selector, ' ') !== false;
 	}
 	
@@ -165,7 +165,7 @@ class SassRuleNode extends SassNode {
 	 * @param string selector to extend
 	 * @return array the merged sequences 
 	 */
-	private function mergeSequence($extender, $selector) {
+	protected function mergeSequence($extender, $selector) {
 		$extender = explode(' ', $extender);
 		$end = ' '.array_pop($extender);
 		$selector = explode(' ', $selector);
@@ -249,7 +249,7 @@ class SassRuleNode extends SassNode {
 	 * @return mixed integer: position of the the first parent reference,
 	 * boolean: false if there is no parent reference.
 	 */
-	private function parentReferencePos($selector) {
+	protected function parentReferencePos($selector) {
 		$inString = '';
 		for ($i = 0, $l = strlen($selector); $i < $l; $i++) {
 			$c = $selector[$i];
@@ -271,7 +271,7 @@ class SassRuleNode extends SassNode {
 	 * @param string selector
 	 * @return boolean true if there is a parent reference in the selector
 	 */
-	private function hasParentReference($selector) {
+	protected function hasParentReference($selector) {
 		return $this->parentReferencePos($selector) !== false;
 	}
 
@@ -280,7 +280,7 @@ class SassRuleNode extends SassNode {
 	 * @param string selector
 	 * @return string selector with parent references resolved
 	 */
-	private function resolveParentReferences($selector, $context) {
+	protected function resolveParentReferences($selector, $context) {
 		$resolvedReferences = array(); 
 		if (!count($this->parentSelectors)) {
 			throw new SassRuleNodeException('Can not use parent selector (' .
@@ -299,7 +299,7 @@ class SassRuleNode extends SassNode {
 	 * @param string selectors
 	 * @return array selectors
 	 */
-	private function explode($string) {
+	protected function explode($string) {
 		$selectors = array();
 		$inString = false;
 		$interpolate = false;

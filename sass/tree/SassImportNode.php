@@ -24,7 +24,7 @@ class SassImportNode extends SassNode {
 	/**
 	 * @var array files to import
 	 */
-	private $files = array();
+	protected $files = array();
 
 	/**
 	 * SassImportNode.
