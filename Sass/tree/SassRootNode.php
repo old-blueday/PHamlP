@@ -28,7 +28,7 @@ class SassRootNode extends SassNode {
 	 */
 	protected $renderer;
 	/**
-	 * @var SassParser
+	 * @var Sass_SassParser
 	 */
 	protected $parser;
 	/**
@@ -38,7 +38,7 @@ class SassRootNode extends SassNode {
 
 	/**
 	 * Root SassNode constructor.
-	 * @param SassParser Sass parser
+	 * @param Sass_SassParser Sass parser
 	 * @return SassNode
 	 */
 	public function __construct($parser) { 

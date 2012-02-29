@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassParser class file.
+ * Sass_SassParser class file.
  * See the {@link http://sass-lang.com/docs Sass documentation}
  * for details of Sass.
  * 
@@ -26,12 +26,12 @@ require_once('SassException.php');
 require_once('tree/SassNode.php');
 
 /**
- * SassParser class.
+ * Sass_SassParser class.
  * Parses {@link http://sass-lang.com/ .sass and .sccs} files.
  * @package			PHamlP
  * @subpackage	Sass
  */
-class SassParser {
+class Sass_SassParser {
 	/**#@+
 	 * Default option values
 	 */
@@ -283,7 +283,7 @@ class SassParser {
 	 * Constructor.
 	 * Sets parser options
 	 * @param array $options
-	 * @return SassParser
+	 * @return Sass_SassParser
 	 */
 	public function __construct($options = array()) {
 		if (!is_array($options)) {

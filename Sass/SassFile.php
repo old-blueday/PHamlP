@@ -27,7 +27,7 @@ class SassFile {
 	 * If caching is enabled a cached version will be used if possible; if not the
 	 * parsed file will be cached.
 	 * @param string filename to parse
-	 * @param SassParser Sass parser
+	 * @param Sass_SassParser Sass parser
 	 * @return SassRootNode
 	 */
 	public static function getTree($filename, $parser) {
@@ -38,7 +38,7 @@ class SassFile {
 			}
 		}
 
-		$sassParser = new SassParser(array_merge($parser->options, array('line'=>1)));
+		$sassParser = new Sass_SassParser(array_merge($parser->options, array('line'=>1)));
 		$tree = $sassParser->parse($filename);
 		if ($parser->cache) {
 			self::setCachedFile($tree, $filename, $parser->cache_location);
@@ -53,7 +53,7 @@ class SassFile {
 	 * If the filename does not end in .sass or .scss try the current syntax first
 	 * then, if a file is not found, try the other syntax.
 	 * @param string filename to find
-	 * @param SassParser Sass parser
+	 * @param Sass_SassParser Sass parser
 	 * @return string path to file
 	 * @throws SassException if file not found
 	 */

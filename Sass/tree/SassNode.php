@@ -226,7 +226,7 @@ class SassNode {
 
 	/**
 	 * Returns the Sass parser.
-	 * @return SassParser the Sass parser
+	 * @return Sass_SassParser the Sass parser
 	 */
 	public function getParser() {
 	  return $this->root->parser;
