@@ -16,7 +16,7 @@ require_once(dirname(__FILE__).'/../PhamlpException.php');
  * @package			PHamlP
  * @subpackage	Sass
  */
-class SassException extends PhamlpException {
+class Sass_SassException extends PhamlpException {
 	/**
 	 * Sass Exception.
 	 * @param string Exception message

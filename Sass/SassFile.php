@@ -55,7 +55,7 @@ class SassFile {
 	 * @param string filename to find
 	 * @param Sass_SassParser Sass parser
 	 * @return string path to file
-	 * @throws SassException if file not found
+	 * @throws Sass_SassException if file not found
 	 */
 	public static function getFile($filename, $parser) {
 		$ext = substr($filename, -5);
@@ -92,7 +92,7 @@ class SassFile {
 			}		
 		}
 
-		throw new SassException('Unable to find {what}: {filename}', array('{what}'=>'import file', '{filename}'=>$filename));
+		throw new Sass_SassException('Unable to find {what}: {filename}', array('{what}'=>'import file', '{filename}'=>$filename));
 	}
 
 	/**

@@ -287,7 +287,7 @@ class Sass_SassParser {
 	 */
 	public function __construct($options = array()) {
 		if (!is_array($options)) {
-			throw new SassException('{what} must be a {type}', array('{what}'=>'options', '{type}'=>'array'));
+			throw new Sass_SassException('{what} must be a {type}', array('{what}'=>'options', '{type}'=>'array'));
 		}
 		if (!empty($options['language'])) {
 			Phamlp::$language = $options['language'];
@@ -350,7 +350,7 @@ class Sass_SassParser {
 		if (method_exists($this, $getter)) {
 			return $this->$getter();
 		}
-		throw new SassException('No getter function for {what}', array('{what}'=>$name));
+		throw new Sass_SassException('No getter function for {what}', array('{what}'=>$name));
 	}
 	
 	public function getCache() {
@@ -463,7 +463,7 @@ class Sass_SassParser {
 				$this->syntax = substr($this->filename, -4);
 			}
 			elseif ($this->syntax !== SassFile::SASS && $this->syntax !== SassFile::SCSS) {
-				throw new SassException('Invalid {what}', array('{what}'=>'syntax option'));
+				throw new Sass_SassException('Invalid {what}', array('{what}'=>'syntax option'));
 			}
 
 			if ($this->cache) {
@@ -544,13 +544,13 @@ class Sass_SassParser {
 				break;
 			case SassMixinDefinitionNode::isa($token):
 				if ($this->syntax === SassFile::SCSS) {
-					throw new SassException('Mixin {which} shortcut not allowed in SCSS', array('{which}'=>'definition'), $this);
+					throw new Sass_SassException('Mixin {which} shortcut not allowed in SCSS', array('{which}'=>'definition'), $this);
 				}
 				return new SassMixinDefinitionNode($token);
 				break;
 			case SassMixinNode::isa($token):
 				if ($this->syntax === SassFile::SCSS) {
-					throw new SassException('Mixin {which} shortcut not allowed in SCSS', array('{which}'=>'include'), $this);
+					throw new Sass_SassException('Mixin {which} shortcut not allowed in SCSS', array('{which}'=>'include'), $this);
 				}
 				return new SassMixinNode($token);
 				break;
@@ -615,7 +615,7 @@ class Sass_SassParser {
 				}
 				else {
 					$this->source = $statement;
-					throw new SassException('Illegal comment type', array(), $this);
+					throw new Sass_SassException('Illegal comment type', array(), $this);
 				}
 			}
 			// Selector statements can span multiple lines
@@ -650,7 +650,7 @@ class Sass_SassParser {
 		if (!is_int($level) ||
 				preg_match("/[^{$this->indentChar}]/", substr($source, 0, $indent))) {
 			$this->source = $source;
-			throw new SassException('Invalid indentation', array(), $this);
+			throw new Sass_SassException('Invalid indentation', array(), $this);
 		}
 		return $level;
 	}
@@ -681,7 +681,7 @@ class Sass_SassParser {
 					elseif (substr($this->source, $srcpos-1, strlen(self::BEGIN_CSS_COMMENT))
 							=== self::BEGIN_CSS_COMMENT) {
 						if (ltrim($statement)) {
-							throw new SassException('Invalid {what}', array('{what}'=>'comment'), (object) array(
+							throw new Sass_SassException('Invalid {what}', array('{what}'=>'comment'), (object) array(
 								'source' => $statement,
 								'filename' => $this->filename,
 								'line' => $this->line,
@@ -789,7 +789,7 @@ class Sass_SassParser {
 						$source = $this->source[$i++];
 					}
 					if (!empty($source) && $this->getLevel($source) > $token->level) {
-						throw new SassException('Nesting not allowed beneath {what}', array('{what}'=>'@import directive'), $token);
+						throw new Sass_SassException('Nesting not allowed beneath {what}', array('{what}'=>'@import directive'), $token);
 					}
 				}
 				return new SassImportNode($token);
@@ -825,7 +825,7 @@ class Sass_SassParser {
 	 * If this is a space the number of spaces determines the indentSpaces; this
 	 * is always 1 if the indent character is a tab.
 	 * Only used for .sass files.
-	 * @throws SassException if the indent is mixed or
+	 * @throws Sass_SassException if the indent is mixed or
 	 * the indent character can not be determined
 	 */
 	protected function setIndentChar() {
@@ -836,7 +836,7 @@ class Sass_SassParser {
 				if ($i < $len && in_array($source[$i], $this->indentChars)) {
 					$this->line = ++$l;
 					$this->source = $source;
-					throw new SassException('Mixed indentation not allowed', array(), $this);
+					throw new Sass_SassException('Mixed indentation not allowed', array(), $this);
 				}
 				$this->indentSpaces = ($this->indentChar == ' ' ? $i : 1);
 				return;

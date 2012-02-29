@@ -16,7 +16,7 @@ require_once(dirname(__FILE__).'/../SassException.php');
  * @package			PHamlP
  * @subpackage	Sass.script
  */
-class SassScriptParserException extends SassException {}
+class SassScriptParserException extends Sass_SassException {}
 
 /**
  * SassScriptLexerException class.

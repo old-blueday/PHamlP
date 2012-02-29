@@ -16,7 +16,7 @@ require_once(dirname(__FILE__).'/../SassException.php');
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassNodeException extends SassException {}
+class SassNodeException extends Sass_SassException {}
 
 /**
  * SassContextException class.
