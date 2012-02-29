@@ -26,19 +26,19 @@ class HamlHelperNode extends HamlNode {
 	/**
 	 * @var string the helper class name
 	 */
-	private $class;
+	protected $class;
 	/**
 	 * @var string helper method name
 	 */
-	private $pre;
+	protected $pre;
 	/**
 	 * @var string helper method name
 	 */
-	private $name;
+	protected $name;
 	/**
 	 * @var string helper method arguments
 	 */
-	private $args;
+	protected $args;
 
 	/**
 	 * HamlFilterNode constructor.

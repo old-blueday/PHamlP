@@ -25,7 +25,7 @@ class Sass {
 	/**
 	 * @var SassParser
 	 */
-	private $sass;
+	protected $sass;
 
 	/**
 	 * Constructor

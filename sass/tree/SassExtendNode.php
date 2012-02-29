@@ -23,7 +23,7 @@ class SassExtendNode extends SassNode {
 	/**
 	 * @var string the directive
 	 */
-	private $value;
+	protected $value;
 
 	/**
 	 * SassExtendNode.

@@ -60,11 +60,11 @@ class HamlNode {
 	/**
 	 * @var HamlRenderer Renderer object
 	 */
-	private $_r; 
+	protected $_r; 
 	/**
 	 * @var array Options
 	 */
-	private $_o;
+	protected $_o;
 
 	public function __construct($content, $parent) {
 	  $this->content = $content;
@@ -162,7 +162,7 @@ class HamlNode {
 	 * Returns the indent level of this node.
 	 * @return integer the indent level of this node
 	 */
-	private function getLevel() {
+	protected function getLevel() {
 		return $this->token['level'];
 	}
 
@@ -172,7 +172,7 @@ class HamlNode {
 	 * @param integer the indent level of this node
 	 * @return HamlNode this node
 	 */
-	private function setLevel($level) {
+	protected function setLevel($level) {
 		$this->token['level'] = $level;
 		return $this;
 	}
@@ -181,7 +181,7 @@ class HamlNode {
 	 * Returns the source for this node
 	 * @return string the source for this node
 	 */
-	private function getSource() {
+	protected function getSource() {
 		return $this->token[HamlParser::HAML_SOURCE];
 	}
 
@@ -189,7 +189,7 @@ class HamlNode {
 	 * Returns the source for this node
 	 * @return string the source for this node
 	 */
-	private function getLine() {
+	protected function getLine() {
 		return $this->token['line'];
 	}
 
@@ -197,7 +197,7 @@ class HamlNode {
 	 * Returns the filename for this node
 	 * @return string the filename for this node
 	 */
-	private function getFilename() {
+	protected function getFilename() {
 		return $this->token['filename'];
 	}
 

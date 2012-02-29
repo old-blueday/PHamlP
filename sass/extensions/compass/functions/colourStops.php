@@ -43,7 +43,7 @@ class CompassList extends SassLiteral {
 }
 
 class CompassColourStop extends SassLiteral {
-	private $colour;
+	protected $colour;
 	public $stop;
 	  
 	public function __construct($colour, $stop = null) {
@@ -227,7 +227,7 @@ class SassExtentionsCompassFunctionsColourStops {
 		return new CompassList($list);
 	}
 	
-	private static function normalize_stops($colourList) {
+	protected static function normalize_stops($colourList) {
 		$positions = $colourList->values;
 		$s = sizeof($positions);
 		

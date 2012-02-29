@@ -16,7 +16,7 @@
  */
 class SassExtentionsCompassConfig {
 	public static $config;
-	private static $defaultConfig = array(
+	protected static $defaultConfig = array(
 						 'project_path' => '',
 								'http_path' => '/',
 									'css_dir' => 'css',
@@ -52,7 +52,7 @@ class SassExtentionsCompassConfig {
 	/**
 	 * Sets default values for paths not specified 
 	 */
-	private static function setDefaults() {
+	protected static function setDefaults() {
 		foreach (array('css', 'images', 'fonts', 'javascripts') as $asset) {
 			if (empty(self::$config[$asset.'_path'])) {
 				self::$config[$asset.'_path'] = self::$config['project_path'].DIRECTORY_SEPARATOR.self::$config[$asset.'_dir'];

@@ -38,24 +38,24 @@ class SassForNode extends SassNode {
 	/**
 	 * @var string variable name for the loop
 	 */
-	private $variable;
+	protected $variable;
 	/**
 	 * @var string expression that provides the loop start value
 	 */
-	private $from;
+	protected $from;
 	/**
 	 * @var string expression that provides the loop end value
 	 */
-	private $to;
+	protected $to;
 	/**
 	 * @var boolean whether the loop end value is inclusive
 	 */
-	private $inclusive;
+	protected $inclusive;
 	/**
 	 * @var string expression that provides the amount by which the loop variable
 	 * changes on each iteration
 	 */
-	private $step;
+	protected $step;
 
 	/**
 	 * SassForNode constructor.

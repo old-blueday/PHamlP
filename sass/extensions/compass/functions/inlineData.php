@@ -39,7 +39,7 @@ class SassExtentionsCompassFunctionsInlineData {
 		return new SassString(join(", ", $files));
 	}
 
-	private function compute_mime_type($path, $mime_type = null) {
+	protected function compute_mime_type($path, $mime_type = null) {
 		if ($mime_type) return $mime_type;
 		
 		switch (true) {
@@ -73,7 +73,7 @@ class SassExtentionsCompassFunctionsInlineData {
 		}
 	}
 
-	private function data($real_path) {
+	protected function data($real_path) {
 		if (file_exists($real_path)) {
 			$fp = fopen($real_path, 'rb');
 			return base64_encode(fread($fp, filesize($real_path)));

@@ -33,7 +33,7 @@ class SassScriptParser {
 	/**
 	 * @var SassScriptLexer the lexer object
 	 */
-	private $lexer;
+	protected $lexer;
 
 	/**
 	* SassScriptParser constructor.

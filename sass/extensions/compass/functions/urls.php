@@ -99,7 +99,7 @@ class SassExtentionsCompassFunctionsUrls {
 	
 	# takes off any leading "./".
 	# if $only_path emits a $path, else emits a url
-	private function clean($url, $only_path) {
+	protected function clean($url, $only_path) {
 		if (!$only_path instanceof SassBoolean) {
 			$only_path = new SassBoolean('false');
 		}
@@ -108,19 +108,19 @@ class SassExtentionsCompassFunctionsUrls {
 		return ($only_path->toBoolean() ? $url : "url('$url')");
 	}
 
-	private function is_absolute_path($path) {
+	protected function is_absolute_path($path) {
 		return ($path[0] === '/' || substr($path, 0, 4) === 'http');
 	}
 
 	// returns the path relative to the target css file
-	private function compute_relative_path($path) {
+	protected function compute_relative_path($path) {
 		return $path;
 /*		if (target_css_file = options[:css_filename]) {
 			Pathname.new($path).relative_path_from(Pathname.new(File.dirname(target_css_file))).to_s
 		}*/
 	}
 
-/*	private function compute_cache_buster($path, real_path) {
+/*	protected function compute_cache_buster($path, real_path) {
 		if Compass.configuration.asset_cache_buster {
 			args = [$path]
 			if Compass.configuration.asset_cache_buster.arity > 1 {
@@ -132,7 +132,7 @@ class SassExtentionsCompassFunctionsUrls {
 		}
 	}
 
-	private function default_cache_buster($path, real_path) {
+	protected function default_cache_buster($path, real_path) {
 		if File.readable?(real_path) {
 			File.mtime(real_path).to_i.to_s
 		}

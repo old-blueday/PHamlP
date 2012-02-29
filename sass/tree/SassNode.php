@@ -172,7 +172,7 @@ class SassNode {
 	 * Returns the level of this node.
 	 * @return integer the level of this node
 	 */
-	private function getLevel() {
+	protected function getLevel() {
 		return $this->token->level;
 	}
 
@@ -180,7 +180,7 @@ class SassNode {
 	 * Returns the source for this node
 	 * @return string the source for this node
 	 */
-	private function getSource() {
+	protected function getSource() {
 		return $this->token->source;
 	}
 
@@ -188,7 +188,7 @@ class SassNode {
 	 * Returns the debug_info option setting for this node
 	 * @return boolean the debug_info option setting for this node
 	 */
-	private function getDebug_info() {
+	protected function getDebug_info() {
 		return $this->parser->debug_info;
 	}
 
@@ -196,7 +196,7 @@ class SassNode {
 	 * Returns the line number for this node
 	 * @return string the line number for this node
 	 */
-	private function getLine() {
+	protected function getLine() {
 		return $this->token->line;
 	}
 
@@ -204,7 +204,7 @@ class SassNode {
 	 * Returns the line_numbers option setting for this node
 	 * @return boolean the line_numbers option setting for this node
 	 */
-	private function getLine_numbers() {
+	protected function getLine_numbers() {
 		return $this->parser->line_numbers;
 	}
 
@@ -212,7 +212,7 @@ class SassNode {
 	 * Returns vendor specific properties
 	 * @return array vendor specific properties
 	 */
-	private function getVendor_properties() {
+	protected function getVendor_properties() {
 		return $this->parser->vendor_properties;
 	}
 
@@ -220,7 +220,7 @@ class SassNode {
 	 * Returns the filename for this node
 	 * @return string the filename for this node
 	 */
-	private function getFilename() {
+	protected function getFilename() {
 		return $this->token->filename;
 	}
 

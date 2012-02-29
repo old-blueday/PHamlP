@@ -25,8 +25,8 @@ class SassScriptFunction {
 	const NAME = 1;
 	const ARGS = 2;
 
-	private $name;
-	private $args;
+	protected $name;
+	protected $args;
 
 	/**
 	 * SassScriptFunction constructor
@@ -81,7 +81,7 @@ class SassScriptFunction {
 	 * @param string path to directory to import
 	 * @return array filenames imported
 	 */
-	private function import($dir) {
+	protected function import($dir) {
 		$files = array();
 
 		foreach (array_slice(scandir($dir), 2) as $file) {

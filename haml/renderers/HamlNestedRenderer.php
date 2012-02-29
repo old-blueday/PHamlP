@@ -71,7 +71,7 @@ class HamlNestedRenderer extends HamlRenderer {
 		return $this->getIndent($node) . parent::renderEndCodeBlock($node) . "\n";
 	}
 
-	private function getIndent($node) {
+	protected function getIndent($node) {
 	  return str_repeat(' ', 2 * $node->line['indentLevel']);
 	}
 }

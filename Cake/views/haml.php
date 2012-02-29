@@ -64,7 +64,7 @@ class HamlView extends View {
 	/**
 	* @var HamlParser the Haml parser
 	*/
-	private $haml;
+	protected $haml;
 	/**
 	 * @var array Haml parser option names. These are passed to the parser if set.
 	 * 
@@ -149,7 +149,7 @@ class HamlView extends View {
 	/**
 	 * Do a sanity check on the options and setup alias to filters
 	 */
-	private function _init() {
+	protected function _init() {
 		$options = array();
 		foreach ($this->hamlOptions as $option) {
 			$_option = Configure::read("Haml.$option");
@@ -275,7 +275,7 @@ class HamlView extends View {
 	 * @return string cached view file path
 	 * @access private
 	 */
-	private function _getCachedViewFileName($file)	{
+	protected function _getCachedViewFileName($file)	{
 		$cachedViewFile = str_replace(substr($file, strrpos($file, '.')), '.ctp', $file);
 		if($this->useCachePath)	{
 			$cachedViewFile = str_replace(VIEWS, CACHE.'haml'.DS, $cachedViewFile);

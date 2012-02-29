@@ -20,7 +20,7 @@ class SassFile {
 	const SCSS = 'scss';
 	const SASSC = 'sassc';
 	
-	private static $extensions = array(self::SASS, self::SCSS);
+	protected static $extensions = array(self::SASS, self::SCSS);
 
 	/**
 	 * Returns the parse tree for a file.

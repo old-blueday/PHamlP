@@ -55,12 +55,12 @@ class SassNumber extends SassLiteral {
 	/**
 	 * @var array numerator units of this number
 	 */
-	private $numeratorUnits = array();
+	protected $numeratorUnits = array();
 
 	/**
 	 * @var array denominator units of this number
 	 */
-	private $denominatorUnits = array();
+	protected $denominatorUnits = array();
 	
 	/**
 	 * @var boolean whether this number is in an expression or a literal number
@@ -285,7 +285,7 @@ class SassNumber extends SassLiteral {
 	 * @return SassNumber the other number with its value and units coerced if neccessary
 	 * @throws SassNumberException if the units are incompatible
 	 */
-	private function convert($other) {
+	protected function convert($other) {
 		if ($this->isUnitless()) {
 			$this->numeratorUnits = $other->numeratorUnits;
 			$this->denominatorUnits = $other->denominatorUnits;
@@ -322,7 +322,7 @@ class SassNumber extends SassLiteral {
 	 * @param array units being converted to
 	 * @return float the coercion factor to apply
 	 */
-	private function coercionFactor($fromUnits, $toUnits) {
+	protected function coercionFactor($fromUnits, $toUnits) {
 		$units = $this->removeCommonUnits($fromUnits, $toUnits);
 		$fromUnits = $units[0];
 		$toUnits = $units[1];
@@ -351,7 +351,7 @@ class SassNumber extends SassLiteral {
 	 * @param array units to test
 	 * @return boolean true if all units can be converted, false if not
 	 */
-	private function areConvertable($units) {
+	protected function areConvertable($units) {
 		$convertable = array_keys(self::$unitConversion);
 		foreach ($units as $unit) {
 			if (!in_array($unit, $convertable))
@@ -368,7 +368,7 @@ class SassNumber extends SassLiteral {
 	 * @param array second set of units
 	 * @return array both sets of units with common units removed
 	 */
-	private function removeCommonUnits($u1, $u2) {
+	protected function removeCommonUnits($u1, $u2) {
 		$_u1 = array();
 		while (!empty($u1)) {
 			$u = array_shift($u1);

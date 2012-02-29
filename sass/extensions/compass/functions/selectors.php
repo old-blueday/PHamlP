@@ -18,7 +18,7 @@
 class SassExtentionsCompassFunctionsSelectors {
 	const COMMA_SEPARATOR = '/\s*,\s*/';
 	
-	private static $defaultDisplay = array(
+	protected static $defaultDisplay = array(
 		'block' => array('address', 'blockquote', 'center', 'dir', 'div', 'dd',
 			'dl', 'dt', 'fieldset', 'form', 'frameset h1', 'h2', 'h3', 'h4', 'h5',
 			'h6', 'hr', 'isindex', 'menu', 'noframes', 'noscript', 'ol', 'p', 'pre',

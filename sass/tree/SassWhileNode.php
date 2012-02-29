@@ -24,11 +24,11 @@ class SassWhileNode extends SassNode {
 	 * @var boolean whether this is a do/while.
 	 * A do/while loop is guarenteed to run at least once.
 	 */
-	private $isDo;
+	protected $isDo;
 	/**
 	 * @var string expression to evaluate
 	 */
-	private $expression;
+	protected $expression;
 
 	/**
 	 * SassWhileNode constructor.

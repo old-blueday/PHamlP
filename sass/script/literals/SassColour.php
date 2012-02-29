@@ -235,15 +235,15 @@ class SassColour extends SassLiteral {
 	/**
 	 * @var integer red component. 0 - 255
 	 */
-	private $red;
+	protected $red;
 	/**
 	 * @var integer green component. 0 - 255
 	 */
-	private $green;
+	protected $green;
 	/**
 	 * @var integer blue component. 0 - 255
 	 */
-	private $blue;
+	protected $blue;
 	/**@#-*/
 	/**@#+
 	 * HSL colour components
@@ -255,20 +255,20 @@ class SassColour extends SassLiteral {
 	/**
 	 * @var float hue component. 0 - 360
 	 */
-	private $hue;
+	protected $hue;
 	/**
 	 * @var float saturation component. 0 - 100
 	 */
-	private $saturation;
+	protected $saturation;
 	/**
 	 * @var float lightness component. 0 - 100
 	 */
-	private $lightness;
+	protected $lightness;
 	/**@#-*/
 	/**
 	 * @var float alpha component. 0 - 1
 	 */
-	private $alpha = 1;
+	protected $alpha = 1;
 
 	/**
 	 * Constructs an RGB or HSL color object, optionally with an alpha channel.
@@ -770,7 +770,7 @@ class SassColour extends SassLiteral {
 	 * Algorithm from the CSS3 spec: {@link http://www.w3.org/TR/css3-color/#hsl-color}
 	 * @uses hue2rgb()
 	 */
-	private function hsl2rgb() {
+	protected function hsl2rgb() {
 		$h = ($this->hue % 360)/360;
 		$s = $this->saturation/100;
 		$l = $this->lightness/100;
@@ -786,7 +786,7 @@ class SassColour extends SassLiteral {
 	/**
 	 * Converts from hue to RGB colourspace
 	 */
-	private function hue2rgb($m1, $m2, $h) {
+	protected function hue2rgb($m1, $m2, $h) {
 		$h += ($h < 0 ? 1 : ($h > 1 ? -1 : 0));
 		
 		if ($h * 6 < 1) {
@@ -808,7 +808,7 @@ class SassColour extends SassLiteral {
 	 * Converts from RGB to HSL colourspace
 	 * Algorithm adapted from {@link http://en.wikipedia.org/wiki/HSL_and_HSV#Conversion_from_RGB_to_HSL_or_HSV}
 	 */
-	private function rgb2hsl() {
+	protected function rgb2hsl() {
 		$rgb = array($this->red/255, $this->green/255, $this->blue/255);
 		$max = max($rgb);
 		$min = min($rgb);
@@ -849,7 +849,7 @@ class SassColour extends SassLiteral {
 	* @throws SassColourException if mixed colour space keys given or not all
 	* keys for a colour space are required but not given (contructor)
 	*/
-	private function assertValid($colour, $all = true) {
+	protected function assertValid($colour, $all = true) {
 		if (array_key_exists('red', $colour) || array_key_exists('green', $colour) || array_key_exists('blue', $colour)) {
 			if (array_key_exists('hue', $colour) || array_key_exists('saturation', $colour) || array_key_exists('lightness', $colour)) {
 				throw new SassColourException('SassColour can not have HSL and RGB keys specified', array(), SassScriptParser::$context->node);

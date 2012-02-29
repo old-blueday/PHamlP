@@ -44,7 +44,7 @@ class Phamlp {
 	 * @param string the original message
 	 * @return string the translated message
 	 */
-	private static function translate($category, $message) {
+	protected static function translate($category, $message) {
 		if (empty(self::$messages[$category])) self::loadMessages($category);
 		return (empty(self::$messages[$category][$message]) ? $message : self::$messages[$category][$message]);
 	}
@@ -63,7 +63,7 @@ class Phamlp {
 	 * </pre>
 	 * @param string message category
 	 */
-	private static function loadMessages($category) {
+	protected static function loadMessages($category) {
 		$messageFile = dirname(__FILE__).DIRECTORY_SEPARATOR.$category.DIRECTORY_SEPARATOR.'messages'.DIRECTORY_SEPARATOR.self::$language.'.php';
 		if (file_exists($messageFile)) {
 			self::$messages[$category] = require_once($messageFile);

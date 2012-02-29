@@ -529,7 +529,7 @@ class SassScriptFunctions {
 	 * @param float maximum value the amount can bemixed
 	 * @param string amount units
 	 */
-	private static function adjust($colour, $amount, $ofCurrent, $attribute, $op, $min, $max, $units='') {
+	protected static function adjust($colour, $amount, $ofCurrent, $attribute, $op, $min, $max, $units='') {
 		SassLiteral::assertType($colour, 'SassColour');
 		SassLiteral::assertType($amount, 'SassNumber');
 		SassLiteral::assertInRange($amount, $min, $max, $units);

@@ -25,7 +25,7 @@ class SassPropertyNode extends SassNode {
 	const VALUE	 = 3;
 	const IS_SCRIPT = '= ';
 
-	private static $psuedoSelectors = array(
+	protected static $psuedoSelectors = array(
 		'root',
 		'nth-child(',
 		'nth-last-child(',
@@ -62,11 +62,11 @@ class SassPropertyNode extends SassNode {
 	/**
 	 * @var string property name
 	 */
-	private $name;
+	protected $name;
 	/**
 	 * @var string property value or expression to evaluate
 	 */
-	private $value;
+	protected $value;
 
 	/**
 	 * SassPropertyNode constructor.
@@ -231,7 +231,7 @@ class SassPropertyNode extends SassNode {
 	 * @param string the string to test
 	 * @return bool true if the string starts with a pseudo selector, false if not
 	 */
-	private static function isPseudoSelector($string) {
+	protected static function isPseudoSelector($string) {
 		preg_match(self::MATCH_PSUEDO_SELECTOR, $string, $matches);
 		return (isset($matches[0]) && in_array($matches[0], self::$psuedoSelectors)) ||
 			preg_match(self::MATCH_INTERPOLATION, $string);
