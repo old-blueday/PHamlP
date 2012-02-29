@@ -530,7 +530,7 @@ class Sass_SassParser {
 		$token = $this->getToken();
 		if (empty($token)) return null;
 		switch (true) {
-			case SassDirectiveNode::isa($token):
+			case Sass_tree_SassDirectiveNode::isa($token):
 				return $this->parseDirective($token, $node);
 				break;
 			case Sass_tree_SassCommentNode::isa($token):
@@ -771,7 +771,7 @@ class Sass_SassParser {
 	 * @return SassNode a Sass directive node
 	 */
 	protected function parseDirective($token, $parent) {
-		switch (SassDirectiveNode::extractDirective($token)) {
+		switch (Sass_tree_SassDirectiveNode::extractDirective($token)) {
 			case '@extend':
 				return new SassExtendNode($token);
 				break;
@@ -814,7 +814,7 @@ class Sass_SassParser {
 				return new Sass_tree_SassDebugNode($token, true);
 				break;
 			default:
-				return new SassDirectiveNode($token);
+				return new Sass_tree_SassDirectiveNode($token);
 				break;
 		}
 	}

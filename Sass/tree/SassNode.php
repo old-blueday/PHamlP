@@ -269,8 +269,8 @@ class SassNode {
 	 * @param boolean true if the node is in a directive, false if not
 	 */
 	public function inDirective() {
-		return $this->parent instanceof SassDirectiveNode ||
-				$this->parent instanceof SassDirectiveNode;
+		return $this->parent instanceof Sass_tree_SassDirectiveNode ||
+				$this->parent instanceof Sass_tree_SassDirectiveNode;
 	}
 
 	/**
