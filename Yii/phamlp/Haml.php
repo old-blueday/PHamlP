@@ -147,20 +147,20 @@ class Haml extends CViewRenderer {
 	/**
 	* @var HamlParser the Haml parser
 	*/
-	private $haml;
+	protected $haml;
 	/**
 	 * @var array Haml parser option names. These are passed to the parser if set.
 	 */
-	private $hamlOptions = array('format', 'doctype', 'escapeHtml', 'suppressEval', 'attrWrapper', 'style', 'ugly', 'preserveComments', 'debug', 'filterDir', 'doctypes', 'emptyTags', 'inlineTags', 'minimizedAttributes', 'preserve', 'helperFile');
+	protected $hamlOptions = array('format', 'doctype', 'escapeHtml', 'suppressEval', 'attrWrapper', 'style', 'ugly', 'preserveComments', 'debug', 'filterDir', 'doctypes', 'emptyTags', 'inlineTags', 'minimizedAttributes', 'preserve', 'helperFile');
 	/**
 	 * @var string Path to filters. Derived from filterPathAlias.
 	 */
-	private $filterDir;
+	protected $filterDir;
 
 	/**
 	 * Do a sanity check on the options and setup alias to filters
 	 */
-	private function _init() {
+	protected function _init() {
 		if (isset($this->filterPathAlias)) {
 			$this->filterDir = Yii::getPathOfAlias($this->filterPathAlias);
 		}
