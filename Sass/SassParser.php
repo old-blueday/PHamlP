@@ -801,7 +801,7 @@ class Sass_SassParser {
 				return new SassIfNode($token);
 				break;
 			case '@else': // handles else and else if directives
-				return new SassElseNode($token);
+				return new Sass_tree_SassElseNode($token);
 				break;
 			case '@do':
 			case '@while':

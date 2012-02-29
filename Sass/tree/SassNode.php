@@ -117,7 +117,7 @@ class SassNode {
 	 * @return SassNode the child to add
 	 */
 	public function addChild($child) {
-		if ($child instanceof SassElseNode) {
+		if ($child instanceof Sass_tree_SassElseNode) {
 			if (!$this->lastChild instanceof SassIfNode) {
 				throw new Sass_SassException('@else(if) directive must come after @(else)if', array(), $child);
 			}
