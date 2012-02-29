@@ -808,10 +808,10 @@ class Sass_SassParser {
 				return new SassWhileNode($token);
 				break;
 			case '@debug':
-				return new SassDebugNode($token);
+				return new Sass_tree_SassDebugNode($token);
 				break;
 			case '@warn':
-				return new SassDebugNode($token, true);
+				return new Sass_tree_SassDebugNode($token, true);
 				break;
 			default:
 				return new SassDirectiveNode($token);

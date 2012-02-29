@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id: SassDebugNode.php 49 2010-04-04 10:51:24Z chris.l.yates $ */
 /**
- * SassDebugNode class file.
+ * Sass_tree_SassDebugNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,12 +10,12 @@
  */
 
 /**
- * SassDebugNode class.
+ * Sass_tree_SassDebugNode class.
  * Represents a Sass @debug or @warn directive.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassDebugNode extends SassNode {
+class Sass_tree_SassDebugNode extends SassNode {
 	const IDENTIFIER = '@';
 	const MATCH = '/^@(?:debug|warn)\s+(.+?)\s*;?$/';
 	const MESSAGE = 1;
@@ -35,14 +35,14 @@ class SassDebugNode extends SassNode {
 	protected $warning;
 
 	/**
-	 * SassDebugNode.
+	 * Sass_tree_SassDebugNode.
 	 * @param object source token
 	 * @param mixed string: an internally generated warning message about the
 	 * source
 	 * boolean: the source token is a @debug or @warn directive containing the
 	 * message; True if this is a @warn directive
 	 * @param array parameters for the message
-	 * @return SassDebugNode
+	 * @return Sass_tree_SassDebugNode
 	 */
 	public function __construct($token, $message=false, $params=array()) {
 		parent::__construct($token);

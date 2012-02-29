@@ -314,7 +314,7 @@ class SassNode {
 	 * @param array line
 	 */
 	public function addWarning($message, $params=array()) {
-		$warning = new SassDebugNode($this->token, $message, $params);
+		$warning = new Sass_tree_SassDebugNode($this->token, $message, $params);
 		$this->addChild($warning);
 	}
 
