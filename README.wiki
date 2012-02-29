@@ -15,100 +15,113 @@
       <?php } ?>
     </ul>
   </div></pre><hr/><h2><a name="Sass"></a>Sass<a href="#Sass" class="section_anchor"></a></h2><p>Sass is a meta-language on top of CSS that’s used to describe the style of a document cleanly and structurally, with more power than flat CSS allows; keeping stylesheets  powerful, manageable and <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" rel="nofollow">DRY</a>. </p><p><strong>Features</strong><ul><li>Nested rules. See stylesheet structure at a glance and avoid repetition. </li><li>Variables. Make stylesheets readable. </li><li>SassScript. Perform operations on variables. Unit conversion and colour operations are supported. </li><li>Mixins. Reuse property and rule definitions without retyping them. </li><li>Selector Inheritance. Tell one selector to inherit all the styles of another without duplicating the CSS properties. </li><li>Import. Import Sass files (.sass and .scss) into a single CSS output to save HTTP requests. </li><li>Caching of compiled Sass files. </li></ul></p><p>Mixins are extremely powerful. They allow properties and rules to be reused without having to rewrite them. Their true power is realised with the use of arguments; this allows a mixin to be reused in different ways in different places. </p><p>The <i>@import</i> directive imports other Sass files. This allows stylesheets to be split up into manageable sections and even modularise your stylesheets; the <a href="http://compass-style.org/" rel="nofollow">Compass Project</a> is a great example of how Sass permits modularisation. Variables and Mixins defined in imported stylesheets are available in the importing stylesheet. And the output is a single CSS file; saving HTTP requests. </p><p>From V3.2 PHamlP includes a port of <a href="http://compass-style.org/" rel="nofollow">Compass</a>. </p><p>See <a href="http://sass-lang.com/" rel="nofollow">http://sass-lang.com/</a> for details on Sass </p><h3><a name="Example_Code"></a>Example Code<a href="#Example_Code" class="section_anchor"></a></h3><p>{<i>bracketed comments are </i>not<i> Sass code</i>} </p><h4><a name="Sass"></a>Sass<a href="#Sass" class="section_anchor"></a></h4><pre class="prettyprint">  $link_colour: #556b2f {defines a variable}
-$link_visited_colour: crimson {PHamlP supports SVG colours)
-$link_hover_colour: &#33;link_colour + #333 {SassScript has colour operations}
-=replace-text($img, $x = 50%, $y = 50%) {= defines a mixin. Uses arguments and has defaults for some)
-text-indent: -9999em
-overflow: hidden
-background:
-image: image_url($img)
-repeat: no-repeat
-position: $x $y
-h1
-+replace-text(/images/logo.png) {+ use a mixin)
-font: {save repition with nesting of selectors}
-size: 120%
-weight: bold
-h2#overview
-+replace-text(/images/overview.png, 20%) {use the mixin with different arguments}
-.content
-margin: 1% 2%
-p
-padding: 1% 2%
-a
-color: $link_colour {assign a variable}
-&amp;:hover {&amp; is replaced with the parent selector}
-color: $link_hover_colour
-&amp;:visited
-color: $link_visited_colour
-@import sass_import {import sass_import.sass and make variables and mixins defined in it available here. No extension means use the current extension.}
-@import scss_import.scss {import scss_import.scss and make variables and mixins defined in it available here. Need to specify .scss in a .sass file, and vice versa}</pre><h4><a name="SCSS"></a>SCSS<a href="#SCSS" class="section_anchor"></a></h4><p>Version 3 of PHamlP brings the new SCSS syntax (note: the indented SASS syntax is <i>not</i> deprecated and is fully supported). This is the equivalent of the above in SCSS. </p><pre class="prettyprint">  $link_colour: #556b2f;
-$link_visited_colour: crimson;
-$link_hover_colour: $link_colour + #333;
-@mixin replace-text($img, $x = 50%, $y = 50%) {
-text-indent: -9999em;
-overflow: hidden;
-background: {
-image: image_url($img);
-repeat: no-repeat;
-position: $x $y;
-}
-}
-h1 {
-@include replace-text(/images/logo.png);
-font: {
-size: 120%;
-weight: bold;
-}
-}
-h2#overview {
-@include replace-text(/images/overview.png, 20%);
-}
-.content {
-margin: 1% 2%;
-p {
-padding: 1% 2%;
-}
-a {
-color: $link_colour;
-&amp;:hover {
-color: $link_hover_colour;
-}
-&amp;:visited {
-color: $link_visited_colour;
-}
-}
-}
-@import sass_import.sass;
-@import scss_import;</pre><h4><a name="CSS_(Nested_Rendering)"></a>CSS (Nested Rendering)<a href="#CSS_(Nested_Rendering)" class="section_anchor"></a></h4><pre class="prettyprint">  h1 {
-text-indent: -9999em;
-overflow: hidden;
-background-image: image_url(/images/logo.png);
-background-repeat: no-repeat;
-background-position: 50% 50%;
-font-size: 120%;
-font-weight: bold;
-}
-h2#overview {
-text-indent: -9999em;
-overflow: hidden;
-background-image: image_url(/images/overview.png);
-background-repeat: no-repeat;
-background-position: 20% 50%;
-}
-.content {
-margin: 1% 2%;
-}
-.content p {
-padding: 1% 2%;
-}
-.content p a {
-color: #556b2f;
-}
-.content p a:hover {
-color: #dc143c;
-}
-.content p a:visited {
-color: #889e62;
-}
-{The compiled content of the included files will appear here}</pre><h2><a name="Credits"></a>Credits<a href="#Credits" class="section_anchor"></a></h2><p>PHamlP is a port of Haml and Sass to PHP. All the genius comes from the people that  invented and develop Haml and Sass; in particular: <ul><li><a href="http://hamptoncatlin.com/" rel="nofollow">Hampton Catlin</a>, </li><li><a href="http://nex-3.com/" rel="nofollow">Nathan Weizenbaum</a>, </li><li><a href="http://chriseppstein.github.com/" rel="nofollow">Chris Eppstein</a></li></ul></p><p>The bugs are mine. </p>
+  $link_visited_colour: crimson {PHamlP supports SVG colours)
+  $link_hover_colour: !link_colour + #333 {SassScript has colour operations}
+
+  =replace-text($img, $x = 50%, $y = 50%) {= defines a mixin. Uses arguments and has defaults for some)
+    text-indent: -9999em
+    overflow: hidden
+    background:
+      image: image_url($img)
+      repeat: no-repeat
+      position: $x $y
+
+  h1
+    +replace-text(/images/logo.png) {+ use a mixin)
+    font: {save repition with nesting of selectors}
+     size: 120%
+     weight: bold
+
+  h2#overview
+    +replace-text(/images/overview.png, 20%) {use the mixin with different arguments}
+
+  .content
+    margin: 1% 2%
+    p
+      padding: 1% 2%
+    a
+      color: $link_colour {assign a variable}
+      &:hover {& is replaced with the parent selector}
+        color: $link_hover_colour
+      &:visited
+        color: $link_visited_colour
+
+  @import sass_import {import sass_import.sass and make variables and mixins defined in it available here. No extension means use the current extension.}
+  @import scss_import.scss {import scss_import.scss and make variables and mixins defined in it available here. Need to specify .scss in a .sass file, and vice versa}</pre><h4><a name="SCSS"></a>SCSS<a href="#SCSS" class="section_anchor"></a></h4><p>Version 3 of PHamlP brings the new SCSS syntax (note: the indented SASS syntax is <i>not</i> deprecated and is fully supported). This is the equivalent of the above in SCSS. </p><pre class="prettyprint">  $link_colour: #556b2f;
+  $link_visited_colour: crimson;
+  $link_hover_colour: $link_colour + #333;
+
+  @mixin replace-text($img, $x = 50%, $y = 50%) {
+    text-indent: -9999em;
+    overflow: hidden;
+    background: {
+      image: image_url($img);
+      repeat: no-repeat;
+      position: $x $y;
+    }
+  }
+
+  h1 {
+    @include replace-text(/images/logo.png);
+    font: {
+      size: 120%;
+      weight: bold;
+    }
+  }
+
+  h2#overview {
+    @include replace-text(/images/overview.png, 20%);
+  }
+
+  .content {
+    margin: 1% 2%;
+    p {
+      padding: 1% 2%;
+    }
+    a {
+      color: $link_colour;
+      &:hover {
+        color: $link_hover_colour;
+      }
+      &:visited {
+        color: $link_visited_colour;
+      }
+    }
+  }
+
+  @import sass_import.sass;
+  @import scss_import;</pre><h4><a name="CSS_(Nested_Rendering)"></a>CSS (Nested Rendering)<a href="#CSS_(Nested_Rendering)" class="section_anchor"></a></h4><pre class="prettyprint">  h1 {
+    text-indent: -9999em;
+    overflow: hidden;
+    background-image: image_url(/images/logo.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    font-size: 120%;
+    font-weight: bold;
+  }
+
+  h2#overview {
+    text-indent: -9999em;
+    overflow: hidden;
+    background-image: image_url(/images/overview.png);
+    background-repeat: no-repeat;
+    background-position: 20% 50%;
+  }
+
+  .content {
+    margin: 1% 2%;
+  }
+    .content p {
+      padding: 1% 2%;
+    }
+      .content p a {
+        color: #556b2f;
+      }
+        .content p a:hover {
+          color: #dc143c;
+        }
+        .content p a:visited {
+          color: #889e62;
+        }
+  
+  {The compiled content of the included files will appear here}</pre><h2><a name="Credits"></a>Credits<a href="#Credits" class="section_anchor"></a></h2><p>PHamlP is a port of Haml and Sass to PHP. All the genius comes from the people that  invented and develop Haml and Sass; in particular: <ul><li><a href="http://hamptoncatlin.com/" rel="nofollow">Hampton Catlin</a>, </li><li><a href="http://nex-3.com/" rel="nofollow">Nathan Weizenbaum</a>, </li><li><a href="http://chriseppstein.github.com/" rel="nofollow">Chris Eppstein</a></li></ul></p><p>The bugs are mine. </p>
