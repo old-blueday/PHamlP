@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassCommentNode class file.
+ * Sass_tree_SassCommentNode class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,32 +10,32 @@
  */
 
 /**
- * SassCommentNode class.
+ * Sass_tree_SassCommentNode class.
  * Represents a CSS comment.
  * @package			PHamlP
  * @subpackage	Sass.tree
  */
-class SassCommentNode extends SassNode {
+class Sass_tree_SassCommentNode extends SassNode {
 	const NODE_IDENTIFIER = '/';
 	const MATCH = '%^/\*\s*(.*?)\s*(\*/)?$%s';
 	const COMMENT = 1;
-	
-	protected $value; 
-	
+
+	protected $value;
+
 	/**
-	 * SassCommentNode constructor.
+	 * Sass_tree_SassCommentNode constructor.
 	 * @param object source token
 	 * @return CommentNode
 	 */
 	public function __construct($token) {
-		parent::__construct($token);		
+		parent::__construct($token);
 		preg_match(self::MATCH, $token->source, $matches);
 		$this->value = $matches[self::COMMENT];
 	}
-	
+
 	protected function getValue() {
-		return $this->value; 
-	} 
+		return $this->value;
+	}
 
 	/**
 	 * Parse this node.

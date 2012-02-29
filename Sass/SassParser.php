@@ -533,8 +533,8 @@ class Sass_SassParser {
 			case SassDirectiveNode::isa($token):
 				return $this->parseDirective($token, $node);
 				break;
-			case SassCommentNode::isa($token):
-				return new SassCommentNode($token);
+			case Sass_tree_SassCommentNode::isa($token):
+				return new Sass_tree_SassCommentNode($token);
 				break;
 			case SassVariableNode::isa($token):
 				return new SassVariableNode($token);
