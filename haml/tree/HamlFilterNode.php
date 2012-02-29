@@ -20,7 +20,7 @@ class HamlFilterNode extends HamlNode {
 	/**
 	 * @var HamlBaseFilter the filter to run
 	 */
-	private $filter;
+	protected $filter;
 
 	/**
 	 * HamlFilterNode constructor.

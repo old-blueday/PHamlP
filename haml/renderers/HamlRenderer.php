@@ -33,9 +33,9 @@ class HamlRenderer {
 
 	const INDENT = '  ';
 
-	private $format;
-	private $attrWrapper;
-	private $minimizedAttributes;
+	protected $format;
+	protected $attrWrapper;
+	protected $minimizedAttributes;
 
 	/**
 	 * Returns the renderer for the required render style.
@@ -64,7 +64,7 @@ class HamlRenderer {
 	/**
 	 * Renders element attributes
 	 */
-	private function renderAttributes($attributes) {
+	protected function renderAttributes($attributes) {
 		$output = '';
 		foreach ($attributes as $name => $value) {
 			if (is_integer($name)) {  // attribute function

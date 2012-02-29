@@ -16,7 +16,7 @@
  * @subpackage	Haml.tree
  */
 class HamlCommentNode extends HamlNode {
-	private $isConditional;
+	protected $isConditional;
 
 	public function __construct($content, $parent) {
 	  $this->content = $content;
