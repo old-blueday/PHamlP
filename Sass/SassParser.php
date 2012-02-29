@@ -773,7 +773,7 @@ class Sass_SassParser {
 	protected function parseDirective($token, $parent) {
 		switch (Sass_tree_SassDirectiveNode::extractDirective($token)) {
 			case '@extend':
-				return new SassExtendNode($token);
+				return new Sass_tree_SassExtendNode($token);
 				break;
 			case '@mixin':
 				return new SassMixinDefinitionNode($token);
