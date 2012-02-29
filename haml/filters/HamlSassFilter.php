@@ -11,7 +11,7 @@
  */
 
 require_once('HamlCssFilter.php');
-require_once(dirname(__FILE__).'/../../sass/SassParser.php');
+require_once(dirname(__FILE__).'/../../Sass/SassParser.php');
 
 /**
  * {@link Sass http://sass-lang.com/} Filter for
@@ -28,7 +28,7 @@ class HamlSassFilter extends HamlBaseFilter {
 	 * @return string filtered text
 	 */
 	public function run($text) {
-		$sass = new SassParser();
+		$sass = new Sass_SassParser();
 		$css = new HamlCssFilter();
 		$css->init();
 

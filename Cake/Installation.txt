@@ -32,7 +32,7 @@ Sass
 ====
 * Put PHamlP in your vendors directory
 * Put this file in your webroot directory
-* Configure the SassParser using
+* Configure the Sass_SassParser using
   Configure::write('Sass.<optionName>', <optionValue>);
   See below for a description of options
 * Add the following line in your core.php

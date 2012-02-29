@@ -23,7 +23,7 @@ require_once(Yii::getPathOfAlias('ext.phamlp.vendors.phamlp.sass').DIRECTORY_SEP
  */
 class Sass {
 	/**
-	 * @var SassParser
+	 * @var Sass_SassParser
 	 */
 	protected $sass;
 
@@ -33,7 +33,7 @@ class Sass {
 	 * @return Sass
 	 */
 	public function __construct($options) {
-	  $this->sass = new SassParser($options);
+	  $this->sass = new Sass_SassParser($options);
 	}
 
 	/**

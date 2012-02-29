@@ -8,7 +8,7 @@
  * * To use the Sass parser:
  * * Put {@link http://phamlp.googlecode.com PHamlP} in your vendors directory
  * * Put this file in your webroot directory
- * * Configure the SassParser using
+ * * Configure the Sass_SassParser using
  *   <pre>Configure::write('Sass.<optionName>', <optionValue>);</pre>
  *   See below for a description of options
  * * Add the following line in your core.php
@@ -108,9 +108,9 @@ if (file_exists($sassFile)) {
 		}
 	} // foreach
 	
-	App::import('Vendor', 'SassParser', array('file'=>'phamlp'.DS.'sass'.DS.'SassParser.php'));
+	App::import('Vendor', 'Sass_SassParser', array('file'=>'phamlp'.DS.'sass'.DS.'SassParser.php'));
 	
-	$parser = new SassParser($options);
+	$parser = new Sass_SassParser($options);
 
 	echo $parser->toCss($sassFile);
 }
