@@ -49,7 +49,7 @@ class SassExtentionsCompassFunctionsSelectors {
 	#		 width: 2px
 	public static function nest() {
 		if (func_num_args() < 2)
-			throw new SassScriptFunctionException('nest() requires two or more arguments', array(), SassScriptParser::$context->node);
+			throw new Sass_script_SassScriptFunctionException('nest() requires two or more arguments', array(), Sass_script_SassScriptParser::$context->node);
 			
 		$args = func_get_args();
 		$arg = array_shift($args);
@@ -65,7 +65,7 @@ class SassExtentionsCompassFunctionsSelectors {
 			$ancestors = $nested;		
 		}
 		sort($nested);
-		return new SassString(join(', ', $nested));
+		return new Sass_script_literals_SassString(join(', ', $nested));
 	}
 
 	# Permute two selectors, the first may be comma delimited.
@@ -86,7 +86,7 @@ class SassExtentionsCompassFunctionsSelectors {
 				$appended[] = $ancestor.$descendant;
 			}
 		}
-		return new SassString(join(', ', $appended));
+		return new Sass_script_literals_SassString(join(', ', $appended));
 	}
 
 	# Return the header selectors for the levels indicated
@@ -96,16 +96,16 @@ class SassExtentionsCompassFunctionsSelectors {
 	# headers(4) => h1, h2, h3, h4
 	# headers(2,4) => h2, h3, h4
 	public static function headers($from = null, $to = null) {
-		if (!$from || ($from instanceof SassString && $from->value === "all")) {
-			$from = new SassNumber(1);
-			$to = new SassNumber(6);
+		if (!$from || ($from instanceof Sass_script_literals_SassString && $from->value === "all")) {
+			$from = new Sass_script_literals_SassNumber(1);
+			$to = new Sass_script_literals_SassNumber(6);
 		}
 		elseif ($from && !$to) {
 			$to = $from;
-			$from = new SassNumber(1);
+			$from = new Sass_script_literals_SassNumber(1);
 		}
 		
-		return new SassString('h' . join(', h', range($from->value, $to->value)));
+		return new Sass_script_literals_SassString('h' . join(', h', range($from->value, $to->value)));
 	}
 	
 	public static function headings($from = null, $to = null) {
@@ -117,12 +117,12 @@ class SassExtentionsCompassFunctionsSelectors {
 	# enumerate('foo', 1, 4) => foo-1, foo-2, foo-3, foo-4
 	public static function enumerate($prefix, $from, $to, $separator = null) {
 		$_prefix = $prefix->value . (!$separator ? '-' : $separator->value);
-	  return new SassString($_prefix . join(', '.$_prefix, range($from->value, $to->value)));
+	  return new Sass_script_literals_SassString($_prefix . join(', '.$_prefix, range($from->value, $to->value)));
 	}
 	
 	# returns a comma delimited string for all the
 	# elements according to their default css3 display value.
 	public static function elements_of_type($display) {
-		return new SassString(join(', ', self::$defaultDisplay[$display->value]));
+		return new Sass_script_literals_SassString(join(', ', self::$defaultDisplay[$display->value]));
 	}
 }

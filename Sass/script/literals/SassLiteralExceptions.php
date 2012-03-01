@@ -16,32 +16,32 @@ require_once(dirname(__FILE__).'/../SassScriptParserExceptions.php');
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassLiteralException extends SassScriptParserException {}
+class Sass_script_literals_SassLiteralException extends Sass_script_SassScriptParserException {}
 
 /**
- * SassBooleanException class.
+ * Sass_script_literals_SassBooleanException class.
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassBooleanException extends SassLiteralException {}
+class Sass_script_literals_SassBooleanException extends Sass_script_literals_SassLiteralException {}
 
 /**
- * SassColourException class.
+ * Sass_script_literals_SassColourException class.
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassColourException extends SassLiteralException {}
+class Sass_script_literals_SassColourException extends Sass_script_literals_SassLiteralException {}
 
 /**
- * SassNumberException class.
+ * Sass_script_literals_SassNumberException class.
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassNumberException extends SassLiteralException {}
+class Sass_script_literals_SassNumberException extends Sass_script_literals_SassLiteralException {}
 
 /**
- * SassStringException class.
+ * Sass_script_literals_SassStringException class.
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassStringException extends SassLiteralException {}
+class Sass_script_literals_SassStringException extends Sass_script_literals_SassLiteralException {}

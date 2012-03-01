@@ -329,7 +329,7 @@ class Sass_SassParser {
 			'load_paths' 		 => array(dirname(__FILE__) . DIRECTORY_SEPARATOR . self::TEMPLATE_LOCATION),
 			'line'					 => 1,
 			'line_numbers'	 => false,
-			'style' 				 => SassRenderer::STYLE_NESTED,
+			'style' 				 => Sass_renderers_SassRenderer::STYLE_NESTED,
 			'syntax'				 => SassFile::SASS
 		);
 		

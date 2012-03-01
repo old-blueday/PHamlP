@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassScriptParser class file.
+ * Sass_script_SassScriptParser class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -13,13 +13,13 @@ require_once('SassScriptLexer.php');
 require_once('SassScriptParserExceptions.php');
 
 /**
- * SassScriptParser class.
- * Parses SassScript. SassScript is lexed into {@link http://en.wikipedia.org/wiki/Reverse_Polish_notation Reverse Polish notation} by the SassScriptLexer and
+ * Sass_script_SassScriptParser class.
+ * Parses SassScript. SassScript is lexed into {@link http://en.wikipedia.org/wiki/Reverse_Polish_notation Reverse Polish notation} by the Sass_script_SassScriptLexer and
  *  the calculated result returned.
  * @package			PHamlP
  * @subpackage	Sass.script
  */
-class SassScriptParser {
+class Sass_script_SassScriptParser {
 	const MATCH_INTERPOLATION = '/(?<!\\\\)#\{(.*?)\}/';
 	const DEFAULT_ENV = 0;
 	const CSS_RULE = 1;
@@ -31,16 +31,16 @@ class SassScriptParser {
 	public static $context;
 
 	/**
-	 * @var SassScriptLexer the lexer object
+	 * @var Sass_script_SassScriptLexer the lexer object
 	 */
 	protected $lexer;
 
 	/**
-	* SassScriptParser constructor.
-	* @return SassScriptParser
+	* Sass_script_SassScriptParser constructor.
+	* @return Sass_script_SassScriptParser
 	*/
 	public function __construct() {
-		$this->lexer = new SassScriptLexer($this);
+		$this->lexer = new Sass_script_SassScriptLexer($this);
 	}
 
 	/**
@@ -62,7 +62,7 @@ class SassScriptParser {
 	 * @param string expression to parse
 	 * @param Sass_tree_SassContext the context in which the expression is evaluated
 	 * @param	integer the environment in which the expression is evaluated
-	 * @return SassLiteral parsed value
+	 * @return Sass_script_literals_SassLiteral parsed value
 	 */
 	public function evaluate($expression, $context, $environment=self::DEFAULT_ENV) {
 		self::$context = $context;
@@ -72,12 +72,12 @@ class SassScriptParser {
 		
 		while (count($tokens)) {
 			$token = array_shift($tokens);
-			if ($token instanceof SassScriptFunction) {
+			if ($token instanceof Sass_script_SassScriptFunction) {
 				array_push($operands, $token->perform());
 			}
-			elseif ($token instanceof SassLiteral) {
-				if ($token instanceof SassString) {
-					$token = new SassString($this->interpolate($token->toString(), self::$context));
+			elseif ($token instanceof Sass_script_literals_SassLiteral) {
+				if ($token instanceof Sass_script_literals_SassString) {
+					$token = new Sass_script_literals_SassString($this->interpolate($token->toString(), self::$context));
 				}
 				array_push($operands, $token);
 			}
@@ -110,39 +110,39 @@ class SassScriptParser {
 		foreach($tokens as $i=>$token) {
 			// If two literals/expessions are seperated by whitespace use the concat operator
 			if (empty($token)) {
-				if ($i > 0 && (!$tokens[$i-1] instanceof SassScriptOperation || $tokens[$i-1]->operator === SassScriptOperation::$operators[')'][0]) &&
-						(!$tokens[$i+1] instanceof SassScriptOperation || $tokens[$i+1]->operator === SassScriptOperation::$operators['('][0])) {
-					$token = new SassScriptOperation(SassScriptOperation::$defaultOperator, $context);
+				if ($i > 0 && (!$tokens[$i-1] instanceof Sass_script_SassScriptOperation || $tokens[$i-1]->operator === Sass_script_SassScriptOperation::$operators[')'][0]) &&
+						(!$tokens[$i+1] instanceof Sass_script_SassScriptOperation || $tokens[$i+1]->operator === Sass_script_SassScriptOperation::$operators['('][0])) {
+					$token = new Sass_script_SassScriptOperation(Sass_script_SassScriptOperation::$defaultOperator, $context);
 				}
 				else {
 					continue;
 				}				
 			}
-			elseif ($token instanceof SassScriptVariable) {
+			elseif ($token instanceof Sass_script_SassScriptVariable) {
 				$token = $token->evaluate($context);
 				$environment = self::DEFAULT_ENV;
 			}
 
 			// If the token is a number or function add it to the output queue.
- 			if ($token instanceof SassLiteral || $token instanceof SassScriptFunction) {
- 				if ($environment === self::CSS_PROPERTY && $token instanceof SassNumber && !$parenthesis) {
+ 			if ($token instanceof Sass_script_literals_SassLiteral || $token instanceof Sass_script_SassScriptFunction) {
+ 				if ($environment === self::CSS_PROPERTY && $token instanceof Sass_script_literals_SassNumber && !$parenthesis) {
 					$token->inExpression = false; 
  				}
 				array_push($outputQueue, $token);
 			}
 			// If the token is an operation
-			elseif ($token instanceof SassScriptOperation) {
+			elseif ($token instanceof Sass_script_SassScriptOperation) {
 				// If the token is a left parenthesis push it onto the stack.
-				if ($token->operator == SassScriptOperation::$operators['('][0]) {
+				if ($token->operator == Sass_script_SassScriptOperation::$operators['('][0]) {
 					array_push($operatorStack, $token);
 					$parenthesis++;
 				}
 				// If the token is a right parenthesis:
-				elseif ($token->operator == SassScriptOperation::$operators[')'][0]) {
+				elseif ($token->operator == Sass_script_SassScriptOperation::$operators[')'][0]) {
 					$parenthesis--;
 					while ($c = count($operatorStack)) {
 						// If the token at the top of the stack is a left parenthesis
-						if ($operatorStack[$c - 1]->operator == SassScriptOperation::$operators['('][0]) {
+						if ($operatorStack[$c - 1]->operator == Sass_script_SassScriptOperation::$operators['('][0]) {
 							// Pop the left parenthesis from the stack, but not onto the output queue.
 							array_pop($operatorStack);
 							break;
@@ -153,7 +153,7 @@ class SassScriptParser {
 					// If the stack runs out without finding a left parenthesis
 					// there are mismatched parentheses.
 					if ($c == 0) {
-						throw new SassScriptParserException('Unmatched parentheses', array(), $context->node);
+						throw new Sass_script_SassScriptParserException('Unmatched parentheses', array(), $context->node);
 					}
 				}
 				// the token is an operator, o1, so:
@@ -164,7 +164,7 @@ class SassScriptParser {
 						// if o2 is left parenthesis, or
 						// the o1 has left associativty and greater precedence than o2, or
 						// the o1 has right associativity and lower or equal precedence than o2
-						if (($operation->operator == SassScriptOperation::$operators['('][0]) ||
+						if (($operation->operator == Sass_script_SassScriptOperation::$operators['('][0]) ||
 							($token->associativity == 'l' && $token->precedence > $operation->precedence) ||
 							($token->associativity == 'r' && $token->precedence <= $operation->precedence)) {
 							break; // stop checking operators
@@ -180,11 +180,11 @@ class SassScriptParser {
 
 		// When there are no more tokens
 		while ($c = count($operatorStack)) { // While there are operators on the stack:
-			if ($operatorStack[$c - 1]->operator !== SassScriptOperation::$operators['('][0]) {
+			if ($operatorStack[$c - 1]->operator !== Sass_script_SassScriptOperation::$operators['('][0]) {
 				array_push($outputQueue, array_pop($operatorStack));
 			}
 			else {
-				throw new SassScriptParserException('Unmatched parentheses', array(), $context->node);
+				throw new Sass_script_SassScriptParserException('Unmatched parentheses', array(), $context->node);
 			}
 		}
 		return $outputQueue;

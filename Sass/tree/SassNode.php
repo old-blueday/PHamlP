@@ -242,7 +242,7 @@ class Sass_tree_SassNode {
 
 	/**
 	 * Returns the SassScript parser.
-	 * @return SassScriptParser the SassScript parser
+	 * @return Sass_script_SassScriptParser the SassScript parser
 	 */
 	public function getScript() {
 	  return $this->root->script;
@@ -250,7 +250,7 @@ class Sass_tree_SassNode {
 
 	/**
 	 * Returns the renderer.
-	 * @return SassRenderer the renderer
+	 * @return Sass_renderers_SassRenderer the renderer
 	 */
 	public function getRenderer() {
 	  return $this->root->renderer;
@@ -290,7 +290,7 @@ class Sass_tree_SassNode {
 	 * Evaluates a SassScript expression.
 	 * @param string expression to evaluate
 	 * @param Sass_tree_SassContext the context in which the expression is evaluated
-	 * @return SassLiteral value of parsed expression
+	 * @return Sass_script_literals_SassLiteral value of parsed expression
 	 */
 	protected function evaluate($expression, $context, $x=null) {
 		$context->node = $this;

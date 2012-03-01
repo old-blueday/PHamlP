@@ -20,11 +20,11 @@ require_once(dirname(__FILE__).'/../renderers/SassRenderer.php');
  */
 class Sass_tree_SassRootNode extends Sass_tree_SassNode {
 	/**
-	 * @var SassScriptParser SassScript parser
+	 * @var Sass_script_SassScriptParser SassScript parser
 	 */
 	protected $script;
 	/**
-	 * @var SassRenderer the renderer for this node
+	 * @var Sass_renderers_SassRenderer the renderer for this node
 	 */
 	protected $renderer;
 	/**
@@ -49,8 +49,8 @@ class Sass_tree_SassRootNode extends Sass_tree_SassNode {
 			'line' => 0,
 		));
 		$this->parser = $parser;
-		$this->script = new SassScriptParser();
-		$this->renderer = SassRenderer::getRenderer($parser->style);
+		$this->script = new Sass_script_SassScriptParser();
+		$this->renderer = Sass_renderers_SassRenderer::getRenderer($parser->style);
 		$this->root = $this;
 	}
 

@@ -20,12 +20,12 @@ class SassExtentionsCompassFunctionsInlineData {
 		$path = $path->value;
 		$real_path = SassExtentionsCompassConfig::config('images_path').DIRECTORY_SEPARATOR.$path;
 		$url = 'url(data:'.self::compute_mime_type($path, $mime_type).';base64,'.self::data($real_path).')';
-		return new SassString($url);
+		return new Sass_script_literals_SassString($url);
 	}
 
 	public function inline_font_files() {
 		if (func_num_args() % 2)
-			throw new SassScriptFunctionException('An even number of arguments must be passed to inline_font_files()', array(), SassScriptParser::$context->node);
+			throw new Sass_script_SassScriptFunctionException('An even number of arguments must be passed to inline_font_files()', array(), Sass_script_SassScriptParser::$context->node);
 
 		$args = func_get_args();
 		$files = array();
@@ -36,7 +36,7 @@ class SassExtentionsCompassFunctionsInlineData {
 			$url = 'url(data:'.self::compute_mime_type($path).';base64,'.self::data($real_path).')';
 			$files[] = "$url format('".array_shift($args)."')";
 		}
-		return new SassString(join(", ", $files));
+		return new Sass_script_literals_SassString(join(", ", $files));
 	}
 
 	protected function compute_mime_type($path, $mime_type = null) {
@@ -68,7 +68,7 @@ class SassExtentionsCompassFunctionsInlineData {
 				return 'image/'.strtolower($matches[1]);
 				break;
 			default:
-				throw new SassScriptFunctionException('Unable to determine mime type for {what}, please specify one explicitly', array('{what}'=>$path), SassScriptParser::$context->node);
+				throw new Sass_script_SassScriptFunctionException('Unable to determine mime type for {what}, please specify one explicitly', array('{what}'=>$path), Sass_script_SassScriptParser::$context->node);
 				break;
 		}
 	}
@@ -79,6 +79,6 @@ class SassExtentionsCompassFunctionsInlineData {
 			return base64_encode(fread($fp, filesize($real_path)));
 		}
 		else
-			throw new SassScriptFunctionException('Unable to find {what}: {filename}', array('{what}'=>'file', '{filename}'=>$real_path), SassScriptParser::$context->node);
+			throw new Sass_script_SassScriptFunctionException('Unable to find {what}: {filename}', array('{what}'=>'file', '{filename}'=>$real_path), Sass_script_SassScriptParser::$context->node);
 	}
 }

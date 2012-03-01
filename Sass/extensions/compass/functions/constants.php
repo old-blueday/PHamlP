@@ -39,6 +39,6 @@ class SassExtentionsCompassFunctionsConstants {
 					throw new Exception('Cannot determine the opposite of '.trim($position));
 			}
 		}
-		return new SassString(join(' ', $opposites));
+		return new Sass_script_literals_SassString(join(' ', $opposites));
 	}
 }

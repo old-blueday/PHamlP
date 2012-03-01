@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassNumber class file.
+ * Sass_script_literals_SassNumber class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -12,14 +12,14 @@
 require_once('SassLiteral.php');
  
 /**
- * SassNumber class.
+ * Sass_script_literals_SassNumber class.
  * Provides operations and type testing for Sass numbers.
  * Units are of the passed value are converted the those of the class value
  * if it has units. e.g. 2cm + 20mm = 4cm while 2 + 20mm = 22mm.
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassNumber extends SassLiteral {
+class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 	/**
 	 * Regx for matching and extracting numbers
 	 */
@@ -72,7 +72,7 @@ class SassNumber extends SassLiteral {
 	 * class constructor.
 	 * Sets the value and units of the number.
 	 * @param string number
-	 * @return SassNumber
+	 * @return Sass_script_literals_SassNumber
 	 */
 	public function __construct($value) {
 	  preg_match(self::MATCH, $value, $matches);
@@ -97,26 +97,26 @@ class SassNumber extends SassLiteral {
 
 	/**
 	 * Adds the value of other to the value of this
-	 * @param mixed SassNumber|SassColour: value to add
-	 * @return mixed SassNumber if other is a SassNumber or
-	 * SassColour if it is a SassColour
+	 * @param mixed Sass_script_literals_SassNumber|Sass_script_literals_SassColour: value to add
+	 * @return mixed Sass_script_literals_SassNumber if other is a Sass_script_literals_SassNumber or
+	 * Sass_script_literals_SassColour if it is a Sass_script_literals_SassColour
 	 */
 	public function op_plus($other) {
-		if ($other instanceof SassColour) {
+		if ($other instanceof Sass_script_literals_SassColour) {
 			return $other->op_plus($this);
 		}
-		elseif (!$other instanceof SassNumber) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), SassScriptParser::$context->node);
+		elseif (!$other instanceof Sass_script_literals_SassNumber) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), Sass_script_SassScriptParser::$context->node);
 		}
 		else {
 			$other = $this->convert($other);
-			return new SassNumber(($this->value + $other->value).$this->units);
+			return new Sass_script_literals_SassNumber(($this->value + $other->value).$this->units);
 		}
 	}
 
 	/**
 	 * Unary + operator
-	 * @return SassNumber the value of this number
+	 * @return Sass_script_literals_SassNumber the value of this number
 	 */
 	public function op_unary_plus() {
 		return $this;
@@ -124,46 +124,46 @@ class SassNumber extends SassLiteral {
 
 	/**
 	 * Subtracts the value of other from this value
-	 * @param mixed SassNumber|SassColour: value to subtract
-	 * @return mixed SassNumber if other is a SassNumber or
-	 * SassColour if it is a SassColour
+	 * @param mixed Sass_script_literals_SassNumber|Sass_script_literals_SassColour: value to subtract
+	 * @return mixed Sass_script_literals_SassNumber if other is a Sass_script_literals_SassNumber or
+	 * Sass_script_literals_SassColour if it is a Sass_script_literals_SassColour
 	 */
 	public function op_minus($other) {
-		if ($other instanceof SassColour) {
+		if ($other instanceof Sass_script_literals_SassColour) {
 			return $other->op_minus($this);
 		}
-		elseif (!$other instanceof SassNumber) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), SassScriptParser::$context->node);
+		elseif (!$other instanceof Sass_script_literals_SassNumber) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), Sass_script_SassScriptParser::$context->node);
 		}
 		else {
 			$other = $this->convert($other);
-			return new SassNumber(($this->value - $other->value).$this->units);
+			return new Sass_script_literals_SassNumber(($this->value - $other->value).$this->units);
 		}
 	}
 
 	/**
 	 * Unary - operator
-	 * @return SassNumber the negative value of this number
+	 * @return Sass_script_literals_SassNumber the negative value of this number
 	 */
 	public function op_unary_minus() {
-		return new SassNumber(($this->value * -1).$this->units);
+		return new Sass_script_literals_SassNumber(($this->value * -1).$this->units);
 	}
 
 	/**
 	 * Multiplies this value by the value of other
-	 * @param mixed SassNumber|SassColour: value to multiply by
-	 * @return mixed SassNumber if other is a SassNumber or
-	 * SassColour if it is a SassColour
+	 * @param mixed Sass_script_literals_SassNumber|Sass_script_literals_SassColour: value to multiply by
+	 * @return mixed Sass_script_literals_SassNumber if other is a Sass_script_literals_SassNumber or
+	 * Sass_script_literals_SassColour if it is a Sass_script_literals_SassColour
 	 */
 	public function op_times($other) {
-		if ($other instanceof SassColour) {
+		if ($other instanceof Sass_script_literals_SassColour) {
 			return $other->op_times($this);
 		}
-		elseif (!$other instanceof SassNumber) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), SassScriptParser::$context->node);
+		elseif (!$other instanceof Sass_script_literals_SassNumber) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), Sass_script_SassScriptParser::$context->node);
 		}
 		else {
-			return new SassNumber(($this->value * $other->value).$this->unitString(
+			return new Sass_script_literals_SassNumber(($this->value * $other->value).$this->unitString(
 				array_merge($this->numeratorUnits, $other->numeratorUnits),
 				array_merge($this->denominatorUnits, $other->denominatorUnits)
 			));
@@ -172,19 +172,19 @@ class SassNumber extends SassLiteral {
 
 	/**
 	 * Divides this value by the value of other
-	 * @param mixed SassNumber|SassColour: value to divide by
-	 * @return mixed SassNumber if other is a SassNumber or
-	 * SassColour if it is a SassColour
+	 * @param mixed Sass_script_literals_SassNumber|Sass_script_literals_SassColour: value to divide by
+	 * @return mixed Sass_script_literals_SassNumber if other is a Sass_script_literals_SassNumber or
+	 * Sass_script_literals_SassColour if it is a Sass_script_literals_SassColour
 	 */
 	public function op_div($other) {
-		if ($other instanceof SassColour) {
+		if ($other instanceof Sass_script_literals_SassColour) {
 			return $other->op_div($this);
 		}
-		elseif (!$other instanceof SassNumber) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), SassScriptParser::$context->node);
+		elseif (!$other instanceof Sass_script_literals_SassNumber) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), Sass_script_SassScriptParser::$context->node);
 		}
 		elseif ($this->inExpression || $other->inExpression) {
-			return new SassNumber(($this->value / $other->value).$this->unitString(
+			return new Sass_script_literals_SassNumber(($this->value / $other->value).$this->unitString(
 				array_merge($this->numeratorUnits, $other->denominatorUnits),
 				array_merge($this->denominatorUnits, $other->numeratorUnits)
 			));
@@ -196,82 +196,82 @@ class SassNumber extends SassLiteral {
 	
 	/**
 	 * The SassScript == operation.
-	 * @return SassBoolean SassBoolean object with the value true if the values
+	 * @return Sass_script_literals_SassBoolean Sass_script_literals_SassBoolean object with the value true if the values
 	 * of this and other are equal, false if they are not
 	 */
 	public function op_eq($other) {
-		if (!$other instanceof SassNumber) {
-			return new SassBoolean(false);
+		if (!$other instanceof Sass_script_literals_SassNumber) {
+			return new Sass_script_literals_SassBoolean(false);
 		}
 		try {
-			return new SassBoolean($this->value == $this->convert($other)->value);
+			return new Sass_script_literals_SassBoolean($this->value == $this->convert($other)->value);
 		}
 		catch (Exception $e) {
-			return new SassBoolean(false);
+			return new Sass_script_literals_SassBoolean(false);
 		}		
 	}
 	
 	/**
 	 * The SassScript > operation.
 	 * @param sassLiteral the value to compare to this
-	 * @return SassBoolean SassBoolean object with the value true if the values
+	 * @return Sass_script_literals_SassBoolean Sass_script_literals_SassBoolean object with the value true if the values
 	 * of this is greater than the value of other, false if it is not
 	 */
 	public function op_gt($other) {
-		if (!$other instanceof SassNumber) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), SassScriptParser::$context->node);
+		if (!$other instanceof Sass_script_literals_SassNumber) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), Sass_script_SassScriptParser::$context->node);
 		}
-		return new SassBoolean($this->value > $this->convert($other)->value);
+		return new Sass_script_literals_SassBoolean($this->value > $this->convert($other)->value);
 	}
 	
 	/**
 	 * The SassScript >= operation.
 	 * @param sassLiteral the value to compare to this
-	 * @return SassBoolean SassBoolean object with the value true if the values
+	 * @return Sass_script_literals_SassBoolean Sass_script_literals_SassBoolean object with the value true if the values
 	 * of this is greater than or equal to the value of other, false if it is not
 	 */
 	public function op_gte($other) {
-		if (!$other instanceof SassNumber) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), SassScriptParser::$context->node);
+		if (!$other instanceof Sass_script_literals_SassNumber) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), Sass_script_SassScriptParser::$context->node);
 		}
-		return new SassBoolean($this->value >= $this->convert($other)->value);
+		return new Sass_script_literals_SassBoolean($this->value >= $this->convert($other)->value);
 	}
 	
 	/**
 	 * The SassScript < operation.
 	 * @param sassLiteral the value to compare to this
-	 * @return SassBoolean SassBoolean object with the value true if the values
+	 * @return Sass_script_literals_SassBoolean Sass_script_literals_SassBoolean object with the value true if the values
 	 * of this is less than the value of other, false if it is not
 	 */
 	public function op_lt($other) {
-		if (!$other instanceof SassNumber) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), SassScriptParser::$context->node);
+		if (!$other instanceof Sass_script_literals_SassNumber) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), Sass_script_SassScriptParser::$context->node);
 		}
-		return new SassBoolean($this->value < $this->convert($other)->value);
+		return new Sass_script_literals_SassBoolean($this->value < $this->convert($other)->value);
 	}
 	
 	/**
 	 * The SassScript <= operation.
 	 * @param sassLiteral the value to compare to this
-	 * @return SassBoolean SassBoolean object with the value true if the values
+	 * @return Sass_script_literals_SassBoolean Sass_script_literals_SassBoolean object with the value true if the values
 	 * of this is less than or equal to the value of other, false if it is not
 	 */
 	public function op_lte($other) {
-		if (!$other instanceof SassNumber) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), SassScriptParser::$context->node);
+		if (!$other instanceof Sass_script_literals_SassNumber) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'number')), Sass_script_SassScriptParser::$context->node);
 		}
-		return new SassBoolean($this->value <= $this->convert($other)->value);
+		return new Sass_script_literals_SassBoolean($this->value <= $this->convert($other)->value);
 	}
 
 	/**
 	 * Takes the modulus (remainder) of this value divided by the value of other
 	 * @param string value to divide by
-	 * @return mixed SassNumber if other is a SassNumber or
-	 * SassColour if it is a SassColour
+	 * @return mixed Sass_script_literals_SassNumber if other is a Sass_script_literals_SassNumber or
+	 * Sass_script_literals_SassColour if it is a Sass_script_literals_SassColour
 	 */
 	public function op_modulo($other) {
-		if (!$other instanceof SassNumber || !$other->isUnitless()) {
-			throw new SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'unitless number')), SassScriptParser::$context->node);
+		if (!$other instanceof Sass_script_literals_SassNumber || !$other->isUnitless()) {
+			throw new Sass_script_literals_SassNumberException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Number'), '{type}'=>Phamlp::t('sass', 'unitless number')), Sass_script_SassScriptParser::$context->node);
 		}
 		$this->value %= $this->convert($other)->value;
 		return $this;
@@ -281,9 +281,9 @@ class SassNumber extends SassLiteral {
 	 * Converts values and units.
 	 * If this is a unitless numeber it will take the units of other; if not
 	 * other is coerced to the units of this.
-	 * @param SassNumber the other number
-	 * @return SassNumber the other number with its value and units coerced if neccessary
-	 * @throws SassNumberException if the units are incompatible
+	 * @param Sass_script_literals_SassNumber the other number
+	 * @return Sass_script_literals_SassNumber the other number with its value and units coerced if neccessary
+	 * @throws Sass_script_literals_SassNumberException if the units are incompatible
 	 */
 	protected function convert($other) {
 		if ($this->isUnitless()) {
@@ -304,10 +304,10 @@ class SassNumber extends SassLiteral {
 	 * If this number is unitless, it will simply return itself with the given units.
 	 * @param array $numeratorUnits
 	 * @param array $denominatorUnits
-	 * @return SassNumber
+	 * @return Sass_script_literals_SassNumber
 	 */
 	public function coerce($numeratorUnits, $denominatorUnits) {
-		return new SassNumber(($this->isUnitless() ?
+		return new Sass_script_literals_SassNumber(($this->isUnitless() ?
 				$this->value :
 				$this->value *
 					$this->coercionFactor($this->numeratorUnits, $numeratorUnits) /
@@ -328,7 +328,7 @@ class SassNumber extends SassLiteral {
 		$toUnits = $units[1];
 		
 		if (sizeof($fromUnits) !== sizeof($toUnits) || !$this->areConvertable(array_merge($fromUnits, $toUnits))) {
-			throw new SassNumberException("Incompatible units: '{from}' and '{to}'", array('{from}'=>join(' * ', $fromUnits), '{to}'=>join(' * ', $toUnits)), SassScriptParser::$context->node);
+			throw new Sass_script_literals_SassNumberException("Incompatible units: '{from}' and '{to}'", array('{from}'=>join(' * ', $fromUnits), '{to}'=>join(' * ', $toUnits)), Sass_script_SassScriptParser::$context->node);
 		}
 		
 		$coercionFactor = 1;
@@ -338,9 +338,9 @@ class SassNumber extends SassLiteral {
 					self::$unitConversion[$toUnits[$i]] / self::$unitConversion[$from];
 			}
 			else {
-				throw new SassNumberException("Incompatible units: '{from}' and '{to}",
+				throw new Sass_script_literals_SassNumberException("Incompatible units: '{from}' and '{to}",
 					array('{from}'=>join(' * ', $fromUnits), '{to}'=>join(' * ', $toUnits)),
-					SassScriptParser::$context->node);
+					Sass_script_SassScriptParser::$context->node);
 			}			
 		}
 		return $coercionFactor; 
@@ -468,11 +468,11 @@ class SassNumber extends SassLiteral {
 	/**
 	 * Returns the integer value.
  	 * @return integer the integer value.
- 	 * @throws SassNumberException if the number is not an integer
+ 	 * @throws Sass_script_literals_SassNumberException if the number is not an integer
 	 */
 	public function toInt() {
 		if  (!$this->isInt()) {
-			throw new SassNumberException('Not an integer: {value}', array('{value}'=>$this->value), SassScriptParser::$context->node);
+			throw new Sass_script_literals_SassNumberException('Not an integer: {value}', array('{value}'=>$this->value), Sass_script_SassScriptParser::$context->node);
 		}
 	  return intval($this->value);
 	}
@@ -485,7 +485,7 @@ class SassNumber extends SassLiteral {
 	 */
 	public function toString() {
 		if  (!$this->hasLegalUnits()) {
-			throw new SassNumberException('Invalid {what}', array('{what}'=>"CSS units ({$this->units})"), SassScriptParser::$context->node);
+			throw new Sass_script_literals_SassNumberException('Invalid {what}', array('{what}'=>"CSS units ({$this->units})"), Sass_script_SassScriptParser::$context->node);
 		}
 	  return ($this->units == 'px' ? floor($this->value) :
 	  		round($this->value, self::PRECISION)).$this->units;

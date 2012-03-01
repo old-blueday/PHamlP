@@ -14,7 +14,7 @@
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassScriptVariable {
+class Sass_script_SassScriptVariable {
 	/**
 	 * Regex for matching and extracting Variables
 	 */
@@ -37,7 +37,7 @@ class SassScriptVariable {
 	/**
 	 * Returns the SassScript object for this variable.
 	 * @param Sass_tree_SassContext context of the variable
-	 * @return SassLiteral the SassScript object for this variable
+	 * @return Sass_script_literals_SassLiteral the SassScript object for this variable
 	 */
 	public function evaluate($context) {
 		return $context->getVariable($this->name);

@@ -19,13 +19,13 @@ class SassExtentionsCompassFunctionsImageSize {
 	# Returns the $width of the image relative to the images directory
 	public function image_width($image_file) {
 		$image_size = getimagesize(self::real_path($image_file));
-		return new SassNumber($image_size[0].'px');
+		return new Sass_script_literals_SassNumber($image_size[0].'px');
 	}
 
 	# Returns the height of the image relative to the images directory
 	public function image_height($image_file) {
 		$image_size = getimagesize(self::real_path($image_file));
-		return new SassNumber($image_size[1].'px');
+		return new Sass_script_literals_SassNumber($image_size[1].'px');
 	}
 
 	protected function real_path($image_file) {

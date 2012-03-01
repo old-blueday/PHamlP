@@ -20,27 +20,27 @@ class SassExtentionsCompassFunctionsLists {
 	
 	# Return the first value from a space separated list.
 	public static function first_value_of($list) {
-		if ($list instanceof SassString) {
+		if ($list instanceof Sass_script_literals_SassString) {
 			$items = preg_split(self::SPACE_SEPARATOR, $list->value);
-			return new SassString($items[0]);
+			return new Sass_script_literals_SassString($items[0]);
 		}
 		else return $list;
 	}
 	
 	# Return the nth value from a space separated list.
 	public static function nth_value_of($list, $n) {
-		if ($list instanceof SassString) {
+		if ($list instanceof Sass_script_literals_SassString) {
 			$items = preg_split(self::SPACE_SEPARATOR, $list->value);
-			return new SassString($items[$n->toInt()-1]);
+			return new Sass_script_literals_SassString($items[$n->toInt()-1]);
 		}
 		else return $list;
 	}
 	
 	# Return the last value from a space separated list.
 	public static function last_value_of($list) {
-		if ($list instanceof SassString) {
+		if ($list instanceof Sass_script_literals_SassString) {
 			$items = array_reverse(preg_split(self::SPACE_SEPARATOR, $list->value));
-			return new SassString($items[0]);
+			return new Sass_script_literals_SassString($items[0]);
 		}
 		else return $list;
 	}

@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassBoolean class file.
+ * Sass_script_literals_SassBoolean class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -12,20 +12,20 @@
 require_once('SassLiteral.php');
 
 /**
- * SassBoolean class.
+ * Sass_script_literals_SassBoolean class.
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassBoolean extends SassLiteral {
+class Sass_script_literals_SassBoolean extends Sass_script_literals_SassLiteral {
 	/**@#+
 	 * Regex for matching and extracting booleans
 	 */
 	const MATCH = '/^(true|false)\b/';
 
 	/**
-	 * SassBoolean constructor
+	 * Sass_script_literals_SassBoolean constructor
 	 * @param string value of the boolean type
-	 * @return SassBoolean
+	 * @return Sass_script_literals_SassBoolean
 	 */
 	public function __construct($value) {
 		if (is_bool($value)) {
@@ -35,7 +35,7 @@ class SassBoolean extends SassLiteral {
 			$this->value = ($value === 'true' ? true : false);
 		}
 		else {
-			throw new SassBooleanException('Invalid {what}', array('{what}'=>'SassBoolean'), SassScriptParser::$context->node);
+			throw new Sass_script_literals_SassBooleanException('Invalid {what}', array('{what}'=>'Sass_script_literals_SassBoolean'), Sass_script_SassScriptParser::$context->node);
 		}
 	}
 

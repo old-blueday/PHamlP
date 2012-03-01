@@ -49,9 +49,9 @@
 		'number'=>'',
 		'Number'=>'',
 		'Properties can not be assigned at root level'=>'',
-		'SassColour can not have HSL and RGB keys specified'=>'',
-		'SassColour must have all {colourSpace} keys specified'=>'',
-		'SassColour array must have at least 3 elements'=>'',
+		'Sass_script_literals_SassColour can not have HSL and RGB keys specified'=>'',
+		'Sass_script_literals_SassColour must have all {colourSpace} keys specified'=>'',
+		'Sass_script_literals_SassColour array must have at least 3 elements'=>'',
 		'Selectors can not end in a comma'=>'',
 		'Setting variables with "{sassDefault}=" is deprecated; use "${name}: {value}{scssDefault}"'=>'',
 		'Unable to create document tree for {uri}'=>'',
@@ -101,9 +101,9 @@ No setter function for {what}
 number
 Number
 Properties can not be assigned at root level
-SassColour can not have HSL and RGB keys specified
-SassColour must have all {colourSpace} keys specified
-SassColour array must have at least 3 elements
+Sass_script_literals_SassColour can not have HSL and RGB keys specified
+Sass_script_literals_SassColour must have all {colourSpace} keys specified
+Sass_script_literals_SassColour array must have at least 3 elements
 Selectors can not end in a comma
 Setting variables with "{sassDefault}=" is deprecated; use "${name}: {value}{scssDefault}"
 Unable to create document tree for {uri}

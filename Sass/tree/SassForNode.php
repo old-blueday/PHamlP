@@ -91,7 +91,7 @@ class Sass_tree_SassForNode extends Sass_tree_SassNode {
 
 		$context = new Sass_tree_SassContext($context);
 		for ($i = $from; ($from < $to ? $i < $to : $i > $to); $i = $i + $step) {
-			$context->setVariable($this->variable, new SassNumber($i));
+			$context->setVariable($this->variable, new Sass_script_literals_SassNumber($i));
 			$children = array_merge($children, $this->parseChildren($context));
 		}
 		return $children;

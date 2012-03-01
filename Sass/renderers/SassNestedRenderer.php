@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassNestedRenderer class file.
+ * Sass_renderers_SassNestedRenderer class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -12,7 +12,7 @@
 require_once('SassExpandedRenderer.php');
 
 /**
- * SassNestedRenderer class.
+ * Sass_renderers_SassNestedRenderer class.
  * Nested style is the default Sass style, because it reflects the structure of
  * the document in much the same way Sass does. Each rule is indented based on
  * how deeply it's nested. Each property has its own line and is indented
@@ -20,7 +20,7 @@ require_once('SassExpandedRenderer.php');
  * @package			PHamlP
  * @subpackage	Sass.renderers
  */
-class SassNestedRenderer extends SassExpandedRenderer {	
+class Sass_renderers_SassNestedRenderer extends Sass_renderers_SassExpandedRenderer {	
 	/**
 	 * Renders the brace at the end of the rule
 	 * @return string the brace between the rule and its properties

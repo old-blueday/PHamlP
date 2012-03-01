@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassString class file.
+ * Sass_script_literals_SassString class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -12,12 +12,12 @@
 require_once('SassLiteral.php');
  
 /**
- * SassString class.
+ * Sass_script_literals_SassString class.
  * Provides operations and type testing for Sass strings.
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
-class SassString extends SassLiteral {
+class Sass_script_literals_SassString extends Sass_script_literals_SassLiteral {
   const MATCH = '/^(((["\'])(.*)(\3))|(-[a-zA-Z][^\s]*))/i';
   const _MATCH = '/^(["\'])(.*?)(\1)?$/'; // Used to match strings such as "Times New Roman",serif
   const VALUE = 2;
@@ -31,7 +31,7 @@ class SassString extends SassLiteral {
 	/**
 	 * class constructor
 	 * @param string string
-	 * @return SassString
+	 * @return Sass_script_literals_SassString
 	 */
 	public function __construct($value) {
 		preg_match(self::_MATCH, $value, $matches);
@@ -53,8 +53,8 @@ class SassString extends SassLiteral {
 	 * @return sassString the string result
 	 */
 	public function op_plus($other) {
-		if (!($other instanceof SassString)) {
-			throw new SassStringException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Value'), '{type}'=>Phamlp::t('sass', 'string')), SassScriptParser::$context->node);
+		if (!($other instanceof Sass_script_literals_SassString)) {
+			throw new Sass_script_literals_SassStringException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Value'), '{type}'=>Phamlp::t('sass', 'string')), Sass_script_SassScriptParser::$context->node);
 		}
 		$this->value .= $other->value;
 		return $this;
@@ -67,8 +67,8 @@ class SassString extends SassLiteral {
 	 * @return sassString the string result
 	 */
 	public function op_times($other) {
-		if (!($other instanceof SassNumber) || !$other->isUnitless()) {
-			throw new SassStringException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Value'), '{type}'=>Phamlp::t('sass', 'unitless number')), SassScriptParser::$context->node);
+		if (!($other instanceof Sass_script_literals_SassNumber) || !$other->isUnitless()) {
+			throw new Sass_script_literals_SassStringException('{what} must be a {type}', array('{what}'=>Phamlp::t('sass', 'Value'), '{type}'=>Phamlp::t('sass', 'unitless number')), Sass_script_SassScriptParser::$context->node);
 		}
 		$this->value = str_repeat($this->value, $other->value);
 		return $this;
@@ -91,7 +91,7 @@ class SassString extends SassLiteral {
 	}
 	
 	public function toVar() {
-		return SassScriptParser::$context->getVariable($this->value);
+		return Sass_script_SassScriptParser::$context->getVariable($this->value);
 	}
 
 	/**

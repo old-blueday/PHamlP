@@ -41,7 +41,7 @@ class Sass_tree_SassMixinNode extends Sass_tree_SassNode {
 		preg_match(self::MATCH, $token->source, $matches);
 		$this->name = $matches[self::NAME];
 	  if (isset($matches[self::ARGS])) {
-	  	$this->args = SassScriptFunction::extractArgs($matches[self::ARGS]);
+	  	$this->args = Sass_script_SassScriptFunction::extractArgs($matches[self::ARGS]);
 	  }
 	}
 

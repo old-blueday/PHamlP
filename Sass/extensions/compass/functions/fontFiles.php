@@ -18,13 +18,13 @@
 class SassExtentionsCompassFunctionsFontFiles {
 	public function font_files() {
 		if (func_num_args() % 2)
-			throw new SassScriptFunctionException('An even number of arguments must be passed to font_files()', array(), SassScriptParser::$context->node);
+			throw new Sass_script_SassScriptFunctionException('An even number of arguments must be passed to font_files()', array(), Sass_script_SassScriptParser::$context->node);
 
 		$args = func_get_args();
 		$files = array();
 		while ($args) {
 			$files[] = '#{font_url('.array_shift($args)."} format('".array_shift($args)."')";
 		}
-		return new SassString(join(", ", $files));
+		return new Sass_script_literals_SassString(join(", ", $files));
 	}
 }

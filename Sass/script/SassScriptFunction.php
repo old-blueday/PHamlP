@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassScriptFunction class file.
+ * Sass_script_SassScriptFunction class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -10,12 +10,12 @@
  */
 
 /**
- * SassScriptFunction class.
+ * Sass_script_SassScriptFunction class.
  * Preforms a SassScript function.
  * @package			PHamlP
  * @subpackage	Sass.script
  */
-class SassScriptFunction {
+class Sass_script_SassScriptFunction {
 	/**@#+
 	 * Regexes for matching and extracting functions and arguments
 	 */
@@ -29,10 +29,10 @@ class SassScriptFunction {
 	protected $args;
 
 	/**
-	 * SassScriptFunction constructor
+	 * Sass_script_SassScriptFunction constructor
 	 * @param string name of the function
 	 * @param array arguments for the function
-	 * @return SassScriptFunction
+	 * @return Sass_script_SassScriptFunction
 	 */
 	public function __construct($name, $args) {
 		$this->name = $name;
@@ -44,11 +44,11 @@ class SassScriptFunction {
 	 * Look for a user defined function first - this allows users to override
 	 * pre-defined functions, then try the pre-defined functions.
 	 * @return Function the value of this Function
-	 * @throws SassScriptFunctionException if function is undefined
+	 * @throws Sass_script_SassScriptFunctionException if function is undefined
 	 */
 	public function perform() {
 		$name = str_replace('-', '_', $this->name);
-		foreach (SassScriptParser::$context->node->parser->function_paths as $path) {	
+		foreach (Sass_script_SassScriptParser::$context->node->parser->function_paths as $path) {	
 			$_path = explode(DIRECTORY_SEPARATOR, $path);
 			$_class = ucfirst($_path[sizeof($_path) - 2]);
 			foreach (array_slice(scandir($path), 2) as $file) {
@@ -64,16 +64,16 @@ class SassScriptFunction {
 		} // foreach
 
 		require_once('SassScriptFunctions.php');
-		if (method_exists('SassScriptFunctions', $name)) {
-			return call_user_func_array(array('SassScriptFunctions', $name), $this->args);
+		if (method_exists('Sass_script_SassScriptFunctions', $name)) {
+			return call_user_func_array(array('Sass_script_SassScriptFunctions', $name), $this->args);
 		}
 		
-		// CSS function: create a SassString that will emit the function into the CSS
+		// CSS function: create a Sass_script_literals_SassString that will emit the function into the CSS
 		$args = array();
 		foreach ($this->args as $arg) {
 			$args[] = $arg->toString();
 		}
-		return new SassString($this->name . '(' . join(', ', $args) . ')');
+		return new Sass_script_literals_SassString($this->name . '(' . join(', ', $args) . ')');
 	}
 
 	/**

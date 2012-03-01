@@ -14,7 +14,7 @@
  * @package			PHamlP
  * @subpackage	Sass.extensions.compass.functions
  */
-class CompassList extends SassLiteral {	
+class CompassList extends Sass_script_literals_SassLiteral {	
 	public function __construct($values) {
 		$this->value = $values;
 	}
@@ -42,7 +42,7 @@ class CompassList extends SassLiteral {
 	public static function isa($subject) {}
 }
 
-class CompassColourStop extends SassLiteral {
+class CompassColourStop extends Sass_script_literals_SassLiteral {
 	protected $colour;
 	public $stop;
 	  
@@ -64,7 +64,7 @@ class CompassColourStop extends SassLiteral {
 		if (!empty($this->stop)) {
 			$s .= ' ';
 			if ($this->stop->isUnitless()) {
-				$s .= $this->stop->op_times(new SassNumber('100%'))->toString();
+				$s .= $this->stop->op_times(new Sass_script_literals_SassNumber('100%'))->toString();
 			}
 			else {
 				$s .= $this->stop->toString();
@@ -89,7 +89,7 @@ class SassExtentionsCompassFunctionsColourStops {
 	}
 	
 	public static function grad_colour_stops($colour_list) {
-		SassLiteral::assertType($colour_list, 'CompassList');
+		Sass_script_literals_SassLiteral::assertType($colour_list, 'CompassList');
 		self::normalize_stops($colour_list);
 		$v = array_reverse($colour_list->values);
 		$max = $v[0]->stop;
@@ -101,39 +101,39 @@ class SassExtentionsCompassFunctionsColourStops {
 			# have to convert absolute units to percentages for use in colour stop functions.
 			$stop = $pos->stop;
 			if ($stop->numeratorUnits === $max->numeratorUnits) {
-				$stop = $stop->op_div($max)->op_times(new SassNumber('100%'));
+				$stop = $stop->op_div($max)->op_times(new Sass_script_literals_SassNumber('100%'));
 			}
 			# Make sure the colour stops are specified in the right order.
 			if ($last_value && $last_value->value > $stop->value) {
-				throw new SassScriptFunctionException('Colour stops must be specified in increasing order', array(), SassScriptParser::$context->node);
+				throw new Sass_script_SassScriptFunctionException('Colour stops must be specified in increasing order', array(), Sass_script_SassScriptParser::$context->node);
 			}
 		 
 			$last_value = $stop;
 			$colourStops[] = "colour-stop({$stop->toString()}, {$pos->colour->toString()})";
 		}
 		
-		return new SassString(join(', ', $colourStops));
+		return new Sass_script_literals_SassString(join(', ', $colourStops));
 	}
 
 	# returns the end position of the gradient from the colour stop
 	public static function grad_end_position($colourList, $radial = null) {
-		SassLiteral::assertType($colourList, 'CompassList');
+		Sass_script_literals_SassLiteral::assertType($colourList, 'CompassList');
 		if (is_null($radial)) {
-			$radial = new SassBoolean(false);
+			$radial = new Sass_script_literals_SassBoolean(false);
 		}
 		else {
-			SassLiteral::assertType($radial, 'SassBoolean');
+			Sass_script_literals_SassLiteral::assertType($radial, 'Sass_script_literals_SassBoolean');
 		}
-		return self::grad_position($colourList, new SassNumber(sizeof($colourList->values)), new SassNumber(100), $radial);
+		return self::grad_position($colourList, new Sass_script_literals_SassNumber(sizeof($colourList->values)), new Sass_script_literals_SassNumber(100), $radial);
 	}
 
 	public static function grad_position($colourList, $index, $default, $radial = null) {
-		SassLiteral::assertType($colourList, 'CompassList');
+		Sass_script_literals_SassLiteral::assertType($colourList, 'CompassList');
 		if (is_null($radial)) {
-			$radial = new SassBoolean(false);
+			$radial = new Sass_script_literals_SassBoolean(false);
 		}
 		else {
-			SassLiteral::assertType($radial, 'SassBoolean');
+			Sass_script_literals_SassLiteral::assertType($radial, 'Sass_script_literals_SassBoolean');
 		}
 		$stop = $colourList->values[$index->value - 1]->stop;
 		if ($stop && $radial->value) {
@@ -141,18 +141,18 @@ class SassExtentionsCompassFunctionsColourStops {
 			if ($stop->isUnitless()) {
 				if ($stop->value <= 1) {
 					# A unitless number is assumed to be a percentage when it's between 0 and 1
-					$stop = $stop->op_times(new SassNumber('100%'));
+					$stop = $stop->op_times(new Sass_script_literals_SassNumber('100%'));
 				}
 				else {
 					# Otherwise, a unitless number is assumed to be in pixels
-					$stop = $stop->op_times(new SassNumber('1px'));
+					$stop = $stop->op_times(new Sass_script_literals_SassNumber('1px'));
 				}
 			}
 			
 			if ($stop->numeratorUnits === '%' && isset($colourList->values[sizeof($colourList->values)-1]->stop) && $colourList->values[sizeof($colourList->values)-1]->stop->numeratorUnits === 'px')
-				$stop = $stop->op_times($colourList->values[sizeof($colourList->values)-1]->stop)->op_div(new SassNumber('100%'));
+				$stop = $stop->op_times($colourList->values[sizeof($colourList->values)-1]->stop)->op_div(new Sass_script_literals_SassNumber('100%'));
 			//Compass::Logger.new.record(:warning, "Webkit only supports pixels for the start and end stops for radial gradients. Got: #{orig_stop}") if stop.numerator_units != ["px"];
-			return $stop->op_div(new SassNumber('1'.$stop->units));
+			return $stop->op_div(new Sass_script_literals_SassNumber('1'.$stop->units));
 		}
 		elseif ($stop)
 			return $stop;
@@ -180,7 +180,7 @@ class SassExtentionsCompassFunctionsColourStops {
 			}
 		}
 
-		return new SassString(preg_replace(
+		return new Sass_script_literals_SassString(preg_replace(
 			array('/top/', '/bottom/', '/left/', '/right/', '/center/'),
 			array('0%', '100%', '0%', '100%', '50%'), $position
 		));
@@ -195,34 +195,34 @@ class SassExtentionsCompassFunctionsColourStops {
 		$list = array();
 		
 		foreach ($args as $arg) {
-			if ($arg instanceof SassColour) {
+			if ($arg instanceof Sass_script_literals_SassColour) {
 				$list[] = new CompassColourStop($arg);
 			}
-			elseif ($arg instanceof SassString) {
+			elseif ($arg instanceof Sass_script_literals_SassString) {
 				# We get a string as the result of concatenation
 				# So we have to reparse the expression
 				$colour = $stop = null;
 				if (empty($parser))
-					$parser = new SassScriptParser();
-				$expr = $parser->parse($arg->value, SassScriptParser::$context);
+					$parser = new Sass_script_SassScriptParser();
+				$expr = $parser->parse($arg->value, Sass_script_SassScriptParser::$context);
 				
 				$x = array_pop($expr);
 				
-				if ($x instanceof SassColour)
+				if ($x instanceof Sass_script_literals_SassColour)
 					$colour = $x;
-				elseif ($x instanceof SassScriptOperation) {
+				elseif ($x instanceof Sass_script_SassScriptOperation) {
 					if ($x->operator != 'concat')
 						# This should never happen.
-						throw new SassScriptFunctionException("Couldn't parse a colour stop from: {value}", array('{value}'=>$arg->value), SassScriptParser::$context->node);
+						throw new Sass_script_SassScriptFunctionException("Couldn't parse a colour stop from: {value}", array('{value}'=>$arg->value), Sass_script_SassScriptParser::$context->node);
 					$colour = $expr[0];
 					$stop = $expr[1];
 				}
 				else
-					throw new SassScriptFunctionException("Couldn't parse a colour stop from: {value}", array('{value}'=>$arg->value), SassScriptParser::$context->node);
+					throw new Sass_script_SassScriptFunctionException("Couldn't parse a colour stop from: {value}", array('{value}'=>$arg->value), Sass_script_SassScriptParser::$context->node);
 				$list[] = new CompassColourStop($colour, $stop);
 			}
 			else
-				throw new SassScriptFunctionException('Not a valid color stop: {arg}', array('{arg}'=>$arg->value), SassScriptParser::$context->node);
+				throw new Sass_script_SassScriptFunctionException('Not a valid color stop: {arg}', array('{arg}'=>$arg->value), Sass_script_SassScriptParser::$context->node);
 		}
 		return new CompassList($list);
 	}
@@ -233,9 +233,9 @@ class SassExtentionsCompassFunctionsColourStops {
 		
 		# fill in the start and end positions, if unspecified
 		if (empty($positions[0]->stop))
-			$positions[0]->stop = new SassNumber(0);
+			$positions[0]->stop = new Sass_script_literals_SassNumber(0);
 		if (empty($positions[$s-1]->stop))
-			$positions[$s-1]->stop = new SassNumber('100%');
+			$positions[$s-1]->stop = new Sass_script_literals_SassNumber('100%');
 
 		# fill in empty values
 		for ($i = 0; $i<$s; $i++) {
@@ -243,7 +243,7 @@ class SassExtentionsCompassFunctionsColourStops {
 				$num = 2;
 				for ($j = $i+1; $j<$s; $j++) {
 					if (isset($positions[$j]->stop)) {
-						$positions[$i]->stop = $positions[$i-1]->stop->op_plus($positions[$j]->stop->op_minus($positions[$i-1]->stop))->op_div(new SassNumber($num));
+						$positions[$i]->stop = $positions[$i-1]->stop->op_plus($positions[$j]->stop->op_minus($positions[$i-1]->stop))->op_div(new Sass_script_literals_SassNumber($num));
 						break;
 					}
 					else
@@ -255,14 +255,14 @@ class SassExtentionsCompassFunctionsColourStops {
 		foreach ($positions as &$pos) {
 			if ($pos->stop->isUnitless()) {
 				$pos->stop = ($pos->stop->value <= 1 ?
-					$pos->stop->op_times(new SassNumber('100%')) :
-					$pos->stop->op_times(new SassNumber('1px'))
+					$pos->stop->op_times(new Sass_script_literals_SassNumber('100%')) :
+					$pos->stop->op_times(new Sass_script_literals_SassNumber('1px'))
 				);
 			}
 		}
-		if ($positions[$s-1]->stop->op_eq(new SassNumber('0px'))->toBoolean() ||
-			 $positions[$s-1]->stop->op_eq(new SassNumber('0%'))->toBoolean())
-			 	throw new SassScriptFunctionException('Colour stops must be specified in increasing order', array(), SassScriptParser::$context->node);
+		if ($positions[$s-1]->stop->op_eq(new Sass_script_literals_SassNumber('0px'))->toBoolean() ||
+			 $positions[$s-1]->stop->op_eq(new Sass_script_literals_SassNumber('0%'))->toBoolean())
+			 	throw new Sass_script_SassScriptFunctionException('Colour stops must be specified in increasing order', array(), Sass_script_SassScriptParser::$context->node);
 		return null;
 	}
 }

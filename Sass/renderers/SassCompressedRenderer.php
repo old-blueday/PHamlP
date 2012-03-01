@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassCompressedRenderer class file.
+ * Sass_renderers_SassCompressedRenderer class file.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -9,14 +9,14 @@
  * @subpackage	Sass.renderers
  */
 /**
- * SassCompressedRenderer class.
+ * Sass_renderers_SassCompressedRenderer class.
  * Compressed style takes up the minimum amount of space possible, having no
  * whitespace except that necessary to separate selectors and a newline at the
  * end of the file. It's not meant to be human-readable
  * @package			PHamlP
  * @subpackage	Sass.renderers
  */
-class SassCompressedRenderer extends SassRenderer {
+class Sass_renderers_SassCompressedRenderer extends Sass_renderers_SassRenderer {
 	/**
 	 * Renders the brace between the selectors and the properties
 	 * @return string the brace between the selectors and the properties

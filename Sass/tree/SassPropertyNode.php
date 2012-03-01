@@ -99,7 +99,7 @@ class Sass_tree_SassPropertyNode extends Sass_tree_SassNode {
 	  	$node = clone $this;
 			$node->name = ($this->inNamespace() ? "{$this->namespace}-" : '') .
 				$this->interpolate($this->name, $context);
-	  	$node->value = $this->evaluate($this->interpolate($this->value, $context), $context, SassScriptParser::CSS_PROPERTY)->toString();
+	  	$node->value = $this->evaluate($this->interpolate($this->value, $context), $context, Sass_script_SassScriptParser::CSS_PROPERTY)->toString();
 	  	if (array_key_exists($node->name, $this->vendor_properties)) {
 	  		foreach ($this->vendor_properties[$node->name] as $vendorProperty) {
 	  			$_node = clone $node;
