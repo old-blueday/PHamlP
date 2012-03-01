@@ -20,15 +20,15 @@ require_once('SassLiteral.php');
  * @subpackage	Sass.script.literals
  */
 class Sass_script_literals_SassString extends Sass_script_literals_SassLiteral {
-  const MATCH = '/^(((["\'])(.*)(\3))|(-[a-zA-Z][^\s]*))/i';
-  const _MATCH = '/^(["\'])(.*?)(\1)?$/'; // Used to match strings such as "Times New Roman",serif
-  const VALUE = 2;
-  const QUOTE = 3;
+	const MATCH = '/^(((["\'])(.*)(\3))|(-[a-zA-Z][^\s]*))/i';
+	const _MATCH = '/^(["\'])(.*?)(\1)?$/'; // Used to match strings such as "Times New Roman",serif
+	const VALUE = 2;
+	const QUOTE = 3;
 
-  /**
-   * @var string string quote type; double or single quotes, or unquoted.
-   */
-  private $quote;
+	/**
+	 * @var string string quote type; double or single quotes, or unquoted.
+	 */
+	private $quote;
 
 	/**
 	 * class constructor
