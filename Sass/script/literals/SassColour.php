@@ -18,14 +18,14 @@ require_once('SassLiteral.php');
  * A SassScript object representing a CSS colour.
  *
  * A colour may be represented internally as RGBA, HSLA, or both. It is
- * originally represented as whatever its input is; if it¡¦s created with RGB
- * values, it¡¦s represented as RGBA, and if it¡¦s created with HSL values, it¡¦s
+ * originally represented as whatever its input is; if itâ€™s created with RGB
+ * values, itâ€™s represented as RGBA, and if itâ€™s created with HSL values, itâ€™s
  * represented as HSLA. Once a property is accessed that requires the other
- * representation ¡V for example, Sass_script_literals_SassColour::red for an HSL color ¡V that
+ * representation â€“ for example, Sass_script_literals_SassColour::red for an HSL color â€“ that
  * component is calculated and cached.
  *
  * The alpha channel of a color is independent of its RGB or HSL representation.
- * It¡¦s always stored, as 1 if nothing else is specified. If only the alpha
+ * Itâ€™s always stored, as 1 if nothing else is specified. If only the alpha
  * channel is modified using Sass_script_literals_SassColour::with(), the cached RGB and HSL values
  * are retained.
  *
