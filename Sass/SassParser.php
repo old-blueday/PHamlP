@@ -158,7 +158,7 @@ class Sass_SassParser {
 	 * @see debug_info
 	 * @see style
 	 */
-	 private $line_numbers;
+	protected $line_numbers;
 
 	/**
 	 * load_paths:

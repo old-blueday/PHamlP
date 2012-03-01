@@ -25,7 +25,7 @@ abstract class Sass_script_literals_SassLiteral {
 	/**
 	 * @var array maps class names to data types
 	 */
-	static private $typeOf = array(
+	protected static $typeOf = array(
 		'Sass_script_literals_SassBoolean' => 'bool',
 		'Sass_script_literals_SassColour'  => 'color',
 		'Sass_script_literals_SassNumber'  => 'number',

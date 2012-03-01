@@ -18,14 +18,14 @@ require_once('SassLiteral.php');
  * A SassScript object representing a CSS colour.
  *
  * A colour may be represented internally as RGBA, HSLA, or both. It is
- * originally represented as whatever its input is; if itâ€™s created with RGB
- * values, itâ€™s represented as RGBA, and if itâ€™s created with HSL values, itâ€™s
+ * originally represented as whatever its input is; if it¡¦s created with RGB
+ * values, it¡¦s represented as RGBA, and if it¡¦s created with HSL values, it¡¦s
  * represented as HSLA. Once a property is accessed that requires the other
- * representation â€“ for example, Sass_script_literals_SassColour::red for an HSL color â€“ that
+ * representation ¡V for example, Sass_script_literals_SassColour::red for an HSL color ¡V that
  * component is calculated and cached.
  *
  * The alpha channel of a color is independent of its RGB or HSL representation.
- * Itâ€™s always stored, as 1 if nothing else is specified. If only the alpha
+ * It¡¦s always stored, as 1 if nothing else is specified. If only the alpha
  * channel is modified using Sass_script_literals_SassColour::with(), the cached RGB and HSL values
  * are retained.
  *
@@ -48,7 +48,7 @@ class Sass_script_literals_SassColour extends Sass_script_literals_SassLiteral {
 	/**@#-*/
 
 	/**@#-*/
-	static private $svgColours = array(
+	protected static $svgColours = array(
 		'aliceblue'							=> '#f0f8ff',
 		'antiquewhite'					=> '#faebd7',
 		'aqua'									=> '#00ffff',
@@ -201,12 +201,12 @@ class Sass_script_literals_SassColour extends Sass_script_literals_SassLiteral {
 	/**
 	 * @var array reverse array (value => name) of named SVG1.0 colours
 	 */
-	static private $_svgColours;
+	protected static $_svgColours;
 
 	/**
 	* @var array reverse array (value => name) of named HTML4 colours
 	*/
-	static private $_html4Colours = array(
+	protected static $_html4Colours = array(
 		'#000000' => 'black',
 		'#000080' => 'navy',
 		'#0000ff' => 'blue',
@@ -225,7 +225,7 @@ class Sass_script_literals_SassColour extends Sass_script_literals_SassLiteral {
 		'#ffffff' => 'white',
 	);
 
-	static private $regex;
+	protected static $regex;
 
 	/**@#+
 	 * RGB colour components
@@ -233,7 +233,7 @@ class Sass_script_literals_SassColour extends Sass_script_literals_SassLiteral {
 	/**
 	 * @var array RGB colour components. Used to check for RGB attributes.
 	 */
-	static private $rgb = array('red', 'green', 'blue');
+	protected static $rgb = array('red', 'green', 'blue');
 	/**
 	 * @var integer red component. 0 - 255
 	 */
@@ -253,7 +253,7 @@ class Sass_script_literals_SassColour extends Sass_script_literals_SassLiteral {
 	/**
 	 * @var array HSL colour components. Used to check for HSL attributes.
 	 */
-	static private $hsl = array('hue', 'saturation', 'lightness');
+	protected static $hsl = array('hue', 'saturation', 'lightness');
 	/**
 	 * @var float hue component. 0 - 360
 	 */

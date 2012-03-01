@@ -46,7 +46,7 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
    * pc: picas — 1 pica = 12 points
    * pt: points — 1 point = 1/72nd of an inch
 	 */
-	static private $unitConversion = array(
+	protected static $unitConversion = array(
 		'in' => 1,
 		'cm' => 2.54,
 		'mm' => 25.4,

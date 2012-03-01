@@ -28,7 +28,7 @@ class Sass_script_literals_SassString extends Sass_script_literals_SassLiteral {
 	/**
 	 * @var string string quote type; double or single quotes, or unquoted.
 	 */
-	private $quote;
+	protected $quote;
 
 	/**
 	 * class constructor
