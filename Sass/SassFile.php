@@ -1,7 +1,7 @@
 <?php
 /* SVN FILE: $Id$ */
 /**
- * SassFile class file.
+ * Sass_SassFile class file.
  * File handling utilites.
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
@@ -11,11 +11,11 @@
  */
 
 /**
- * SassFile class.
+ * Sass_SassFile class.
  * @package			PHamlP
  * @subpackage	Sass
  */
-class SassFile {
+class Sass_SassFile {
 	const SASS = 'sass';
 	const SCSS = 'scss';
 	const SASSC = 'sassc';

@@ -330,7 +330,7 @@ class Sass_SassParser {
 			'line'					 => 1,
 			'line_numbers'	 => false,
 			'style' 				 => Sass_renderers_SassRenderer::STYLE_NESTED,
-			'syntax'				 => SassFile::SASS
+			'syntax'				 => Sass_SassFile::SASS
 		);
 		
 		foreach (array_merge($defaultOptions, $options) as $name=>$value) {
@@ -457,17 +457,17 @@ class Sass_SassParser {
 	 */
 	public function parse($source, $isFile = true) {
 		if ($isFile) {
-			$this->filename = SassFile::getFile($source, $this);
+			$this->filename = Sass_SassFile::getFile($source, $this);
 			
 			if ($isFile) {
 				$this->syntax = substr($this->filename, -4);
 			}
-			elseif ($this->syntax !== SassFile::SASS && $this->syntax !== SassFile::SCSS) {
+			elseif ($this->syntax !== Sass_SassFile::SASS && $this->syntax !== Sass_SassFile::SCSS) {
 				throw new Sass_SassException('Invalid {what}', array('{what}'=>'syntax option'));
 			}
 
 			if ($this->cache) {
-				$cached = SassFile::getCachedFile($this->filename, $this->cache_location);
+				$cached = Sass_SassFile::getCachedFile($this->filename, $this->cache_location);
 				if ($cached !== false) {
 					return $cached;
 				}
@@ -476,7 +476,7 @@ class Sass_SassParser {
 			$tree = $this->toTree(file_get_contents($this->filename));
 
 			if ($this->cache) {
-				SassFile::setCachedFile($tree, $this->filename, $this->cache_location);
+				Sass_SassFile::setCachedFile($tree, $this->filename, $this->cache_location);
 			}
 
 			return $tree;
@@ -493,7 +493,7 @@ class Sass_SassParser {
 	 * @return Sass_tree_SassRootNode the root of this document tree
 	 */
 	protected function toTree($source) {
-		if ($this->syntax === SassFile::SASS) {
+		if ($this->syntax === Sass_SassFile::SASS) {
 			$this->source = explode("\n", $source);
 			$this->setIndentChar();
 		}
@@ -543,13 +543,13 @@ class Sass_SassParser {
 				return new Sass_tree_SassPropertyNode($token, $this->property_syntax);
 				break;
 			case Sass_tree_SassMixinDefinitionNode::isa($token):
-				if ($this->syntax === SassFile::SCSS) {
+				if ($this->syntax === Sass_SassFile::SCSS) {
 					throw new Sass_SassException('Mixin {which} shortcut not allowed in SCSS', array('{which}'=>'definition'), $this);
 				}
 				return new Sass_tree_SassMixinDefinitionNode($token);
 				break;
 			case Sass_tree_SassMixinNode::isa($token):
-				if ($this->syntax === SassFile::SCSS) {
+				if ($this->syntax === Sass_SassFile::SCSS) {
 					throw new Sass_SassException('Mixin {which} shortcut not allowed in SCSS', array('{which}'=>'include'), $this);
 				}
 				return new Sass_tree_SassMixinNode($token);
@@ -566,7 +566,7 @@ class Sass_SassParser {
 	 * @return object
 	 */
 	protected function getToken() {
-		return ($this->syntax === SassFile::SASS ? $this->sass2Token() : $this->scss2Token());
+		return ($this->syntax === Sass_SassFile::SASS ? $this->sass2Token() : $this->scss2Token());
 	}
 	
 	/**
@@ -782,7 +782,7 @@ class Sass_SassParser {
 				return new Sass_tree_SassMixinNode($token);
 				break;
 			case '@import':
-				if ($this->syntax == SassFile::SASS) {
+				if ($this->syntax == Sass_SassFile::SASS) {
 					$i = 0;
 					$source = '';
 					while (!empty($this->source) && empty($source)) {
