@@ -9,7 +9,9 @@
  * @subpackage	Sass.script.literals
  */
 
+/*
 require_once('SassLiteral.php');
+*/
 
 /**
  * Sass_script_literals_SassBoolean class.

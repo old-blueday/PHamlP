@@ -9,7 +9,9 @@
  * @subpackage	Sass.script.literals
  */
 
+/*
 require_once('SassLiteralExceptions.php');
+*/
 
 /**
  * Sass_script_literals_SassLiteral class.
@@ -29,7 +31,7 @@ abstract class Sass_script_literals_SassLiteral {
 		'Sass_script_literals_SassNumber'  => 'number',
 		'Sass_script_literals_SassString'  => 'string'
 	);
-	
+
 	/**
 	 * @var mixed value of the literal type
 	 */
@@ -59,7 +61,7 @@ abstract class Sass_script_literals_SassLiteral {
 			throw new Sass_script_literals_SassLiteralException('No getter function for {what}', array('{what}'=>$name), array(), Sass_script_SassScriptParser::$context->node);
 		}
 	}
-	
+
 	public function __toString() {
 		return $this->toString();
 	}
@@ -87,7 +89,7 @@ abstract class Sass_script_literals_SassLiteral {
 	protected function getValue() {
 		throw new Sass_script_literals_SassLiteralException('Child classes must override this method', array(), Sass_script_SassScriptParser::$context->node);
 	}
-	
+
 	/**
 	 * Adds a child object to this.
 	 * @param sassLiteral the child object
@@ -210,7 +212,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_and($other) {
 		return ($this->toBoolean() ? $other : $this);
 	}
-	
+
 	/**
 	 * The SassScript or operation.
 	 * @param sassLiteral the value to or with this
@@ -219,7 +221,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_or($other) {
 		return ($this->toBoolean() ? $this : $other);
 	}
-	
+
 	/**
 	 * The SassScript xor operation.
 	 * @param sassLiteral the value to xor with this
@@ -229,7 +231,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_xor($other) {
 		return new Sass_script_literals_SassBoolean($this->toBoolean() xor $other->toBoolean());
 	}
-	
+
 	/**
 	 * The SassScript not operation.
 	 * @return Sass_script_literals_SassBoolean Sass_script_literals_SassBoolean object with the value true if the
@@ -238,7 +240,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_not() {
 		return new Sass_script_literals_SassBoolean(!$this->toBoolean());
 	}
-	
+
 	/**
 	 * The SassScript > operation.
 	 * @param sassLiteral the value to compare to this
@@ -248,7 +250,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_gt($other) {
 		return new Sass_script_literals_SassBoolean($this->value > $other->value);
 	}
-	
+
 	/**
 	 * The SassScript >= operation.
 	 * @param sassLiteral the value to compare to this
@@ -258,7 +260,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_gte($other) {
 		return new Sass_script_literals_SassBoolean($this->value >= $other->value);
 	}
-	
+
 	/**
 	 * The SassScript < operation.
 	 * @param sassLiteral the value to compare to this
@@ -268,7 +270,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_lt($other) {
 		return new Sass_script_literals_SassBoolean($this->value < $other->value);
 	}
-	
+
 	/**
 	 * The SassScript <= operation.
 	 * @param sassLiteral the value to compare to this
@@ -278,7 +280,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_lte($other) {
 		return new Sass_script_literals_SassBoolean($this->value <= $other->value);
 	}
-	
+
 	/**
 	 * The SassScript == operation.
 	 * @param sassLiteral the value to compare to this
@@ -288,7 +290,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_eq($other) {
 		return new Sass_script_literals_SassBoolean($this == $other);
 	}
-	
+
 	/**
 	 * The SassScript != operation.
 	 * @param sassLiteral the value to compare to this
@@ -298,7 +300,7 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_neq($other) {
 		return new Sass_script_literals_SassBoolean(!$this->op_eq($other)->toBoolean());
 	}
-	
+
 	/**
 	 * The SassScript default operation (e.g. $a $b, "foo" "bar").
 	 * @param sassLiteral the value to concatenate with a space to this
@@ -316,9 +318,9 @@ abstract class Sass_script_literals_SassLiteral {
 	public function op_comma($other) {
 		return new Sass_script_literals_SassString($this->toString().', '.$other->toString());
 	}
-	
+
 	/**
-	 * Asserts that the literal is the expected type 
+	 * Asserts that the literal is the expected type
 	 * @param Sass_script_literals_SassLiteral the literal to test
 	 * @param string expected type
 	 * @throws Sass_script_SassScriptFunctionException if value is not the expected type
@@ -328,9 +330,9 @@ abstract class Sass_script_literals_SassLiteral {
 			throw new Sass_script_SassScriptFunctionException('{what} must be a {type}', array('{what}'=>($literal instanceof Sass_script_literals_SassLiteral ? $literal->typeOf : 'literal'), '{type}'=>$type), Sass_script_SassScriptParser::$context->node);
 		}
 	}
-	
+
 	/**
-	 * Asserts that the value of a literal is within the expected range 
+	 * Asserts that the value of a literal is within the expected range
 	 * @param Sass_script_literals_SassLiteral the literal to test
 	 * @param float the minimum value
 	 * @param float the maximum value

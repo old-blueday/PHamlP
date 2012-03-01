@@ -9,6 +9,7 @@
  * @subpackage	Sass.tree
  */
 
+/*
 require_once('SassContext.php');
 require_once('SassCommentNode.php');
 require_once('SassDebugNode.php');
@@ -26,6 +27,7 @@ require_once('SassIfNode.php');
 require_once('SassElseNode.php');
 require_once('SassWhileNode.php');
 require_once('SassNodeExceptions.php');
+*/
 
 /**
  * Sass_tree_SassNode class.
@@ -50,7 +52,7 @@ class Sass_tree_SassNode {
 	 * @var object source token
 	 */
 	protected $token;
-	
+
 	/**
 	 * Constructor.
 	 * @param object source token
@@ -59,7 +61,7 @@ class Sass_tree_SassNode {
 	public function __construct($token) {
 		$this->token = $token;
 	}
-	
+
 	/**
 	 * Getter.
 	 * @param string name of property to get
@@ -126,11 +128,11 @@ class Sass_tree_SassNode {
 		else {
 			$this->children[] = $child;
 			$child->parent		= $this;
-			$child->root			= $this->root;			
+			$child->root			= $this->root;
 		}
 		// The child will have children if a debug node has been added
 		foreach ($child->children as $grandchild) {
-			$grandchild->root = $this->root;		
+			$grandchild->root = $this->root;
 		}
 	}
 
@@ -307,9 +309,9 @@ class Sass_tree_SassNode {
 		$context->node = $this;
 		return $this->script->interpolate($expression, $context);
 	}
-	
+
 	/**
-	 * Adds a warning to the node. 
+	 * Adds a warning to the node.
 	 * @param string warning message
 	 * @param array line
 	 */
@@ -328,7 +330,7 @@ class Sass_tree_SassNode {
 		foreach ($this->children as $child) {
 			$children = array_merge($children, $child->parse($context));
 		} // foreach
-		return $children; 
+		return $children;
 	}
 
 	/**

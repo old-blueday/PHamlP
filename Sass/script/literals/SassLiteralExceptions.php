@@ -9,7 +9,9 @@
  * @subpackage	Sass.script.literals
  */
 
+/*
 require_once(dirname(__FILE__).'/../SassScriptParserExceptions.php');
+*/
 
 /**
  * Sass literal exception.

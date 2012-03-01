@@ -48,7 +48,7 @@ class Sass_script_SassScriptFunction {
 	 */
 	public function perform() {
 		$name = str_replace('-', '_', $this->name);
-		foreach (Sass_script_SassScriptParser::$context->node->parser->function_paths as $path) {	
+		foreach (Sass_script_SassScriptParser::$context->node->parser->function_paths as $path) {
 			$_path = explode(DIRECTORY_SEPARATOR, $path);
 			$_class = ucfirst($_path[sizeof($_path) - 2]);
 			foreach (array_slice(scandir($path), 2) as $file) {
@@ -63,11 +63,13 @@ class Sass_script_SassScriptFunction {
 			} // foreach
 		} // foreach
 
+		/*
 		require_once('SassScriptFunctions.php');
+		*/
 		if (method_exists('Sass_script_SassScriptFunctions', $name)) {
 			return call_user_func_array(array('Sass_script_SassScriptFunctions', $name), $this->args);
 		}
-		
+
 		// CSS function: create a Sass_script_literals_SassString that will emit the function into the CSS
 		$args = array();
 		foreach ($this->args as $arg) {
@@ -102,36 +104,36 @@ class Sass_script_SassScriptFunction {
 	public static function isa($subject) {
 		if (!preg_match(self::MATCH, $subject, $matches))
 			return false;
-		
+
 		$match = $matches[0];
 		$paren = 1;
 		$strpos = strlen($match);
 		$strlen = strlen($subject);
-		
+
 		while($paren && $strpos < $strlen) {
 			$c = $subject[$strpos++];
-			
+
 			$match .= $c;
 			if ($c === '(') {
 				$paren += 1;
 			}
 			elseif ($c === ')') {
 				$paren -= 1;
-			}			
+			}
 		}
 		return $match;
 	}
-	
+
 	public static function extractArgs($string) {
 		$args = array();
 		$arg = '';
 		$paren = 0;
 		$strpos = 0;
 		$strlen = strlen($string);
-		
+
 		while ($strpos < $strlen) {
 			$c = $string[$strpos++];
-			
+
 			switch ($c) {
 				case '(':
 					$paren += 1;
@@ -162,7 +164,7 @@ class Sass_script_SassScriptFunction {
 					break;
 			}
 		}
-		
+
 		if ($arg) $args[] = trim($arg);
 		return $args;
 	}

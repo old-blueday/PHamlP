@@ -9,7 +9,9 @@
  * @subpackage	Sass.tree
  */
 
+/*
 require_once(dirname(__FILE__).'/../SassException.php');
+*/
 
 /**
  * Sass_tree_SassNodeException class.

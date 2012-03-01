@@ -9,7 +9,9 @@
  * @subpackage	Sass.renderers
  */
 
+/*
 require_once('SassCompactRenderer.php');
+*/
 
 /**
  * Sass_renderers_SassExpandedRenderer class.
@@ -27,7 +29,7 @@ class Sass_renderers_SassExpandedRenderer extends Sass_renderers_SassCompactRend
 	protected function between() {
 	  return " {\n" ;
 	}
-	
+
 	/**
 	 * Renders the brace at the end of the rule
 	 * @return string the brace between the rule and its properties

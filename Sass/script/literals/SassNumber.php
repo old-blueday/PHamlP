@@ -9,8 +9,10 @@
  * @subpackage	Sass.script.literals
  */
 
+/*
 require_once('SassLiteral.php');
- 
+*/
+
 /**
  * Sass_script_literals_SassNumber class.
  * Provides operations and type testing for Sass numbers.
@@ -61,10 +63,10 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 	 * @var array denominator units of this number
 	 */
 	protected $denominatorUnits = array();
-	
+
 	/**
 	 * @var boolean whether this number is in an expression or a literal number
-	 * Used to determine whether division should take place 
+	 * Used to determine whether division should take place
 	 */
 	public $inExpression = true;
 
@@ -80,9 +82,9 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 	  if (!empty($matches[self::UNITS])) {
 			$units = explode('/', $matches[self::UNITS]);
 			$numeratorUnits = $denominatorUnits = array();
-			
+
 			foreach (explode('*', $units[0]) as $unit) {
-				$numeratorUnits[] = trim($unit);			
+				$numeratorUnits[] = trim($unit);
 			}
 			if (isset($units[1])) {
 				foreach (explode('*', $units[1]) as $unit) {
@@ -90,7 +92,7 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 				}
 			}
 			$units = $this->removeCommonUnits($numeratorUnits, $denominatorUnits);
-			$this->numeratorUnits = $units[0];			
+			$this->numeratorUnits = $units[0];
 			$this->denominatorUnits = $units[1];
 	  }
 	}
@@ -193,7 +195,7 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 			return parent::op_div($other);
 		}
 	}
-	
+
 	/**
 	 * The SassScript == operation.
 	 * @return Sass_script_literals_SassBoolean Sass_script_literals_SassBoolean object with the value true if the values
@@ -208,9 +210,9 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 		}
 		catch (Exception $e) {
 			return new Sass_script_literals_SassBoolean(false);
-		}		
+		}
 	}
-	
+
 	/**
 	 * The SassScript > operation.
 	 * @param sassLiteral the value to compare to this
@@ -223,7 +225,7 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 		}
 		return new Sass_script_literals_SassBoolean($this->value > $this->convert($other)->value);
 	}
-	
+
 	/**
 	 * The SassScript >= operation.
 	 * @param sassLiteral the value to compare to this
@@ -236,7 +238,7 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 		}
 		return new Sass_script_literals_SassBoolean($this->value >= $this->convert($other)->value);
 	}
-	
+
 	/**
 	 * The SassScript < operation.
 	 * @param sassLiteral the value to compare to this
@@ -249,7 +251,7 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 		}
 		return new Sass_script_literals_SassBoolean($this->value < $this->convert($other)->value);
 	}
-	
+
 	/**
 	 * The SassScript <= operation.
 	 * @param sassLiteral the value to compare to this
@@ -295,12 +297,12 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 		}
 		return $other;
 	}
-	
+
 	/**
 	 * Returns the value of this number converted to other units.
 	 * The conversion takes into account the relationship between e.g. mm and cm,
 	 * as well as between e.g. in and cm.
-	 * 
+	 *
 	 * If this number is unitless, it will simply return itself with the given units.
 	 * @param array $numeratorUnits
 	 * @param array $denominatorUnits
@@ -315,7 +317,7 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 		).join(' * ', $numeratorUnits) .
 	  (!empty($denominatorUnits) ? ' / ' . join(' * ', $denominatorUnits) : ''));
 	}
-	
+
 	/**
 	 * Calculates the corecion factor to apply to the value
 	 * @param array units being converted from
@@ -326,11 +328,11 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 		$units = $this->removeCommonUnits($fromUnits, $toUnits);
 		$fromUnits = $units[0];
 		$toUnits = $units[1];
-		
+
 		if (sizeof($fromUnits) !== sizeof($toUnits) || !$this->areConvertable(array_merge($fromUnits, $toUnits))) {
 			throw new Sass_script_literals_SassNumberException("Incompatible units: '{from}' and '{to}'", array('{from}'=>join(' * ', $fromUnits), '{to}'=>join(' * ', $toUnits)), Sass_script_SassScriptParser::$context->node);
 		}
-		
+
 		$coercionFactor = 1;
 		foreach ($fromUnits as $i=>$from) {
 			if (array_key_exists($from) && array_key_exists($from)) {
@@ -341,11 +343,11 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 				throw new Sass_script_literals_SassNumberException("Incompatible units: '{from}' and '{to}",
 					array('{from}'=>join(' * ', $fromUnits), '{to}'=>join(' * ', $toUnits)),
 					Sass_script_SassScriptParser::$context->node);
-			}			
+			}
 		}
-		return $coercionFactor; 
+		return $coercionFactor;
 	}
-	
+
 	/**
 	 * Returns a value indicating if all the units are capable of being converted
 	 * @param array units to test
@@ -355,15 +357,15 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 		$convertable = array_keys(self::$unitConversion);
 		foreach ($units as $unit) {
 			if (!in_array($unit, $convertable))
-				return false;		
+				return false;
 		}
-		return true; 
+		return true;
 	}
-	
+
 	/**
 	 * Removes common units from each set.
 	 * We don't use array_diff because we want (for eaxmple) mm*mm/mm*cm to
-	 * end up as mm/cm. 
+	 * end up as mm/cm.
 	 * @param array first set of units
 	 * @param array second set of units
 	 * @return array both sets of units with common units removed
@@ -434,7 +436,7 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 	public function getNumeratorUnits() {
 	  return join(' * ', $this->numeratorUnits);
 	}
-	
+
 	/**
 	 * Returns a value indicating if this number can be compared to other.
 	 * @return boolean true if this number can be compared to other, false if not
@@ -442,10 +444,10 @@ class Sass_script_literals_SassNumber extends Sass_script_literals_SassLiteral {
 	public function isComparableTo($other) {
 		try {
 			$this->op_plus($other);
-			return true; 
+			return true;
 		}
 		catch (Exception $e) {
-			return false; 
+			return false;
 		}
 	}
 

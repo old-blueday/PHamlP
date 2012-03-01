@@ -9,7 +9,9 @@
  * @subpackage	Sass.script
  */
 
+/*
 require_once(dirname(__FILE__).'/../SassException.php');
+*/
 
 /**
  * Sass_script_SassScriptParserException class.

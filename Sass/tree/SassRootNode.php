@@ -9,8 +9,10 @@
  * @subpackage	Sass.tree
  */
 
+/*
 require_once(dirname(__FILE__).'/../script/SassScriptParser.php');
 require_once(dirname(__FILE__).'/../renderers/SassRenderer.php');
+*/
 
 /**
  * Sass_tree_SassRootNode class.
@@ -41,7 +43,7 @@ class Sass_tree_SassRootNode extends Sass_tree_SassNode {
 	 * @param Sass_SassParser Sass parser
 	 * @return Sass_tree_SassNode
 	 */
-	public function __construct($parser) { 
+	public function __construct($parser) {
 		parent::__construct((object) array(
 			'source' => '',
 			'level' => -1,
@@ -79,15 +81,15 @@ class Sass_tree_SassRootNode extends Sass_tree_SassNode {
 		} // foreach
 		return $output;
 	}
-	
+
 	public function extend($extendee, $selectors) {
 		$this->extenders[$extendee] = (isset($this->extenders[$extendee])
-			? array_merge($this->extenders[$extendee], $selectors) : $selectors);		
+			? array_merge($this->extenders[$extendee], $selectors) : $selectors);
 	}
-	
+
 	public function getExtenders() {
-		return $this->extenders;  
-	} 
+		return $this->extenders;
+	}
 
 	/**
 	 * Returns a value indicating if the line represents this type of node.
